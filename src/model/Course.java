@@ -137,16 +137,50 @@ public class Course {
 
     }
 
-    public static void main(String[] args) {
-        Course c = new Course();
-        try {
-            ArrayList<String> x = c.getRegisteredStudent("Introduction to Programming");
-            for (String i : x) {
-                System.out.println(i);
-            }
-            // c.removeStudent("CS102", "Huda Amr");
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+    public void addCourse(String courseID, String name, int year, int semester) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        File file = new File("output/courses.json");
+        List<Course> courses = loadCourses(mapper, file);
+        Course course = new Course(courseID, name, year, semester);
+        if (!isCourseExist(courses, courseID)) {
+            courses.add(course);
+        } else {
+            System.out.println("This Course ia already Exist");
         }
+        saveCourses(mapper, file, courses);
     }
+
+    public void editCourse(String courseID, String name, int year, int semester) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        File file = new File("output/courses.json");
+        List<Course> courses = loadCourses(mapper, file);
+
+        if (!isCourseExist(courses, courseID)) {
+            System.out.println("This Course is not Exist");
+        } else {
+            for (Course course : courses) {
+                if (course.ID.equals(courseID)) {
+                    course.name = name;
+                    course.year = year;
+                    course.semester = semester;
+                }
+            }
+        }
+        saveCourses(mapper, file, courses);
+    }
+
+    public void deleteCourse(String courseID, String name) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        File file = new File("output/courses.json");
+        List<Course> courses = loadCourses(mapper, file);
+
+        if (!isCourseExist(courses, courseID)) {
+            System.out.println("This Course is not Exist");
+        } else {
+            courses.removeIf(course -> courseID.equals(course.ID));
+        }
+        saveCourses(mapper, file, courses);
+    }
+
+    
 }
