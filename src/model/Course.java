@@ -1,4 +1,5 @@
 package src.model;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -125,11 +126,10 @@ public class Course {
         List<Course> courses = loadCourses(mapper, file);
 
         for (Course course : courses) {
-            if(course.name.equals(courseName))
-            {
+            if (course.name.equals(courseName)) {
                 return course.Students;
             }
-                
+
         }
 
         System.out.println("No Registered Student in this Course");

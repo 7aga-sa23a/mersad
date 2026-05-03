@@ -16,13 +16,14 @@ public class Login {
     public Login() {
         Scanner sc = new Scanner(System.in);
 
-        //take Doctor ID and save it in ID variable and all should be unique and numbers
+        // take Doctor ID and save it in ID variable and all should be unique and
+        // numbers
         System.out.println("Enter Your ID: ");
         this.ID = sc.nextLine();
 
         // read the json file and check if the ID exists in the file
         String fileName = "doctors.json";
-    
+
         JsonArray doctorsArray;
 
         try (FileReader reader = new FileReader(fileName)) {
@@ -33,7 +34,11 @@ public class Login {
             return;
         }
 
-        // if the ID exists ask for password and check if it matches with the password in the file, if it matches print login successful, if it does not match print incorrect password and contact IT in the next 24 hours or try again, if the ID does not exist ask to enter ID again or type 'signup' to create a new account.
+        // if the ID exists ask for password and check if it matches with the password
+        // in the file, if it matches print login successful, if it does not match print
+        // incorrect password and contact IT in the next 24 hours or try again, if the
+        // ID does not exist ask to enter ID again or type 'signup' to create a new
+        // account.
         boolean found = false, sign_up = false;
 
         while (!found && !sign_up) {
@@ -47,14 +52,14 @@ public class Login {
                 if (id.equals(this.ID)) {
                     found = true;
                     break;
-                }}
-                if (this.ID.equals("signup")) {
-                    @SuppressWarnings("unused")
-                    Signup doctor1 = new Signup();
-                    sign_up = true;
-                    break;
                 }
-            
+            }
+            if (this.ID.equals("signup")) {
+                @SuppressWarnings("unused")
+                Signup doctor1 = new Signup();
+                sign_up = true;
+                break;
+            }
 
             if (!found) {
                 System.out.println("ID not found. Try again or type 'signup' to create a new account: ");
@@ -62,7 +67,9 @@ public class Login {
             }
         }
 
-        // if the ID exists ask for password and check if it matches with the password in the file, if it matches print login successful, if it does not match print incorrect password and contact IT in the next 24 hours or try again.
+        // if the ID exists ask for password and check if it matches with the password
+        // in the file, if it matches print login successful, if it does not match print
+        // incorrect password and contact IT in the next 24 hours or try again.
         if (!sign_up) {
 
             // take Doctor password and save it in password variable
@@ -87,11 +94,11 @@ public class Login {
                     }
                 }
             }
-                if (passwordMatch) {
-                    System.out.println("Login successful!");
-                } else {
-                    System.out.println("Incorrect password. contact IT in the next 24 hours or try again.");
-                }
+            if (passwordMatch) {
+                System.out.println("Login successful!");
+            } else {
+                System.out.println("Incorrect password. contact IT in the next 24 hours or try again.");
+            }
         }
     }
 }

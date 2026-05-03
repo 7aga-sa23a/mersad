@@ -1,6 +1,20 @@
 package src.app;
 
+import src.page.Page;
+import src.page.OnboardingPage;
+import src.page.LoginPage;
+import src.page.SignupPage;
+import src.page.DashboardPage;
+import src.page.AddCoursePage;
+import src.page.ShowCoursesPage;
+import src.page.TakeAttendancePage;
+import src.page.EditAttendancePage;
+
+import java.util.Map;
+import java.util.HashMap;
+
 // Run the program using the following command: java Main.java
+// Or use this shortcut in VS Code: Ctrl + F5
 
 /**
  * This program is a Java OOP Attendance System using QR code
@@ -8,116 +22,64 @@ package src.app;
  * 
  * @author 7aga-sa23a
  * @since 2026-04-24
- * @version v0.1.0
+ * @version v0.3.0
  */
 public class Main {
     /**
-     * Program flow.
+     * This variable maps page names to page objects so they can be easily called by
+     * just their name. It also calls page constructors so that pages are ready to
+     * use.
+     */
+    private static final Map<String, Object> pageMap = new HashMap<>(
+            Map.of(
+                    "OnboardingPage", new OnboardingPage(),
+                    "LoginPage", new LoginPage(),
+                    "SignupPage", new SignupPage(),
+                    "DashboardPage", new DashboardPage(),
+                    "AddCoursePage", new AddCoursePage(),
+                    "ShowCoursesPage", new ShowCoursesPage(),
+                    "TakeAttendancePage", new TakeAttendancePage(),
+                    "EditAttendancePage", new EditAttendancePage()));
+
+    public Main() {}
+
+    /**
+     * The main method that handles the program flow.
      * 
      * @param args
      */
     public static void main(String[] args) {
-        // Start the program flow
-        Main main = new Main();
+        // Starting page
+        final OnboardingPage onboardingPage = (OnboardingPage) pageMap.get("OnboardingPage");
+        String nextPageName = onboardingPage.display();
 
-        main.onboardingPage();
-    }
+        // While there is a page to navigate to
+        while (nextPageName != null) {
+            // If the page to navigate to exists in the page map
+            if (pageMap.containsKey(nextPageName)) {
+                // Get the page object
+                Object nextPageObject = pageMap.get(nextPageName);
 
-    /**
-     * Onboarding page
-     * - Info about the program
-     * - - Clarify what the program does
-     * - - Only for doctors
-     * - Login option
-     * - Sign up option
-     * - Exit option
-     */
-    private void onboardingPage() {
-        // Implement the onboarding page logic
-        System.out.println("Program structure is ready.");
-    }
-
-    /**
-     * Login page
-     * - Doctor ID OR Email
-     * - Password
-     * - In case you forgot your password, please contact the faculty IT
-     * - Signup instead
-     */
-    private void loginPage() {
-        // Implement the login page logic
-    }
-
-    /**
-     * Signup page
-     * - Name (First & last only)
-     * - Email
-     * - Password
-     * - Repeat password
-     * - EXTRA: Simulate email and IT confirmation process
-     * - - Example:
-     * - - Your registration will be evaluated by the IT shortly…
-     * - - Registration was successful!
-     */
-    private void signupPage() {
-        // Implement the signup page logic
-    }
-
-    /**
-     * Dashboard
-     * - Add course
-     * - Show courses
-     * - Take attendance for today
-     * - Edit attendance for a day
-     * - - Shows databases for that day
-     * - Exit program
-     */
-    private void dashboardPage() {
-        // Implement the dashboard page logic
-    }
-
-    /**
-     * Add course
-     * - name
-     * - Year
-     * - Semester
-     * - Code
-     */
-    private void addCoursePage() {
-        // Implement the add course page logic
-    }
-
-    /**
-     * Show courses
-     * - Displays a list of courses added
-     * - - Number of registered students
-     * - - Other course details…
-     * - Edit course
-     * - Delete course
-     * - Option to view course attendance on a specific day
-     * - Option to view student attendance percentage
-     * - - 35% ≥ Red (Danger)
-     * - - 35% - 70% Yellow (Normal)
-     * - - 70% ≤ Green (Safe)
-     */
-    private void showCoursesPage() {
-        // Implement the show courses page logic
-    }
-
-    /**
-     * Take attendance
-     * - Code scanner class
-     * - Connected with JSON database
-     */
-    private void takeAttendancePage() {
-        // Implement the take attendance page logic
-    }
-
-    /**
-     * Edit attendance for a day
-     * - Shows databases for that day
-     */
-    private void editAttendancePage() {
-        // Implement the edit attendance page logic
+                // All page classes inherit from a super class called "Page" which has a
+                // "display" method. The display method can not be used directly from the page
+                // map since the compiler does not know for sure if this object is a page, for
+                // this reason we check if the object is indeed a page.
+                if (nextPageObject instanceof Page) {
+                    Page nextPage = (Page) nextPageObject;
+                    nextPageName = nextPage.display();
+                } else {
+                    // If the object is not a page, then it is not a valid page
+                    System.out.println("Invalid page: " + nextPageName);
+                    System.out.println("Exiting program...");
+                    System.exit(1);
+                }
+            } else {
+                // If the page to navigate to does not exist in the page map, then it is not a
+                // valid page
+                System.out.println("Invalid page: " + nextPageName);
+                System.out.println("Exiting program...");
+                System.exit(2);
+            }
+        }
     }
 }
