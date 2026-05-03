@@ -10,6 +10,7 @@ public final class TakeAttendancePage extends Page {
         
     }
 
+    @Override
     public String display() {
         // Dispaly the page details
         System.out.println("This is the take attendance page.");

@@ -12,6 +12,7 @@ public final class AddCoursePage extends Page {
         
     }
 
+    @Override
     public String display() {
         // Dispaly the page details
         System.out.println("This is the add course page.");

@@ -16,6 +16,7 @@ public final class OnboardingPage extends Page {
         
     }
 
+    @Override
     public String display() {
         // Display onboarding information
         System.out.println("Welcome to the Attendance System.\n" +

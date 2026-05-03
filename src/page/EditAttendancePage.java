@@ -9,6 +9,7 @@ public final class EditAttendancePage extends Page {
 
     }
 
+    @Override
     public String display() {
         // Dispaly the page details
         System.out.println("This is the edit attendance page.");

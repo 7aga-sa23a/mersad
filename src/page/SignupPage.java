@@ -16,6 +16,7 @@ public final class SignupPage extends Page {
         
     }
 
+    @Override
     public String display() {
         // Dispaly the page details
         System.out.println("This is the signup page.");
