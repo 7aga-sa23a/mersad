@@ -15,6 +15,7 @@ public final class AddCoursePage extends Page {
     public String display() {
         // Dispaly the page details
         System.out.println("This is the add course page.");
+        System.out.println();
 
         // ...
 

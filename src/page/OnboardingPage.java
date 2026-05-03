@@ -36,29 +36,27 @@ public final class OnboardingPage extends Page {
         while (true) {
             Scanner scanner = new Scanner(System.in);
             String option = scanner.nextLine().strip().toLowerCase();
+            System.out.println();
 
             // Validate the user's choice
-            // return class::method is like returning a pointer to the method
+            // return the next page to navigate to as a String
 
             // Option 1: Login
             if (option.startsWith("1") || option.contains("log")) {
-                scanner.close();
                 return "LoginPage";
             }
             // Option 2: Sign up
             else if (option.startsWith("2") || option.contains("sign")) {
-                scanner.close();
                 return "SignupPage";
             }
             // Option 3: Exit program
             else if (option.startsWith("3") || option.contains("exit")) {
-                scanner.close();
-                System.out.println("\nExiting the program...!\n");
+                System.out.println("Exiting the program...\n");
                 System.exit(0);
             }
             // Invalid option
             else {
-                System.out.println("\nInvalid option.");
+                System.out.println("Invalid option.");
                 System.out.println("Please enter the option number or name.\n");
             }
 

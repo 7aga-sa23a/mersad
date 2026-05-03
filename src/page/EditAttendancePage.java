@@ -6,12 +6,13 @@ public final class EditAttendancePage extends Page {
      * - Shows databases for that day
      */
     public EditAttendancePage() {
-        
+
     }
 
     public String display() {
         // Dispaly the page details
         System.out.println("This is the edit attendance page.");
+        System.out.println();
 
         // ...
 

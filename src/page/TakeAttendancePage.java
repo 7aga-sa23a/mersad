@@ -13,6 +13,7 @@ public final class TakeAttendancePage extends Page {
     public String display() {
         // Dispaly the page details
         System.out.println("This is the take attendance page.");
+        System.out.println();
 
         // ...
 

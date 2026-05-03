@@ -19,6 +19,7 @@ public final class SignupPage extends Page {
     public String display() {
         // Dispaly the page details
         System.out.println("This is the signup page.");
+        System.out.println();
 
         // ...
 
