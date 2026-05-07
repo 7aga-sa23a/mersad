@@ -16,8 +16,7 @@ public final class DashboardPage extends Page {
         System.out.println("1. Add a course");
         System.out.println("2. Display my courses");
         System.out.println("3. Take today's attendance");
-        System.out.println("4. Edit attendance for a day");
-        System.out.println("5. Exit program");
+        System.out.println("4. Exit program");
         System.out.println();
         System.out.println("Enter your choice: ");
 
@@ -42,12 +41,8 @@ public final class DashboardPage extends Page {
             else if (option.startsWith("3") || option.contains("take") || option.contains("today")) {
                 return "TakeAttendancePage";
             }
-            // Option 4: Edit attendance for a day
-            else if (option.startsWith("4") || option.contains("edit")) {
-                return "EditAttendancePage";
-            }
-            // Option 5: Exit program
-            else if (option.startsWith("5") || option.contains("exit")) {
+            // Option 4: Exit program
+            else if (option.startsWith("4") || option.contains("exit")) {
                 System.out.println("Exiting the program...\n");
                 System.exit(0);
             }
