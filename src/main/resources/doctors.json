@@ -1,0 +1,30 @@
+[
+  {
+    "username": "doctor1",
+    "password": "doctor1",
+    "repeatedPasswordc": "doctor1",
+    "ID": "1",
+    "courses": []
+  },
+  {
+    "username": "doctor2",
+    "password": "doctor2",
+    "repeatedPasswordc": "doctor2",
+    "ID": "2",
+    "courses": []
+  },
+  {
+    "username": "doctor3",
+    "password": "doctor3",
+    "repeatedPasswordc": "doctor3",
+    "ID": "3",
+    "courses": []
+  },
+  {
+    "username": "doctor4",
+    "password": "doctor4",
+    "repeatedPasswordc": "doctor4",
+    "ID": "4",
+    "courses": []
+  }
+]
