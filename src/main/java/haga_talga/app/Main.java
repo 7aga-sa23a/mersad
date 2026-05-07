@@ -9,6 +9,8 @@ import haga_talga.page.AddCoursePage;
 import haga_talga.page.ShowCoursesPage;
 import haga_talga.page.TakeAttendancePage;
 import haga_talga.page.EditAttendancePage;
+import haga_talga.util.AsciiFormatterUtil;
+
 
 import java.util.Map;
 import java.util.HashMap;
@@ -30,6 +32,10 @@ public class Main {
      * just their name. It also calls page constructors so that pages are ready to
      * use.
      */
+
+
+
+
     private static final Map<String, Object> pageMap = new HashMap<>(
             Map.of(
                     "OnboardingPage", new OnboardingPage(),
@@ -49,6 +55,7 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
+
         // Starting page
         final OnboardingPage onboardingPage = (OnboardingPage) pageMap.get("OnboardingPage");
         String nextPageName = onboardingPage.display();
