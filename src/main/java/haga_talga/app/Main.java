@@ -41,8 +41,6 @@ public class Main {
                     "TakeAttendancePage", new TakeAttendancePage(),
                     "EditAttendancePage", new EditAttendancePage()));
 
-    public Main() {}
-
     /**
      * The main method that handles the program flow.
      * 

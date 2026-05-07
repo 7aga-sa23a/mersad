@@ -42,11 +42,14 @@ public final class OnboardingPage extends Page {
 
             // Option 1: Login
             if (option.startsWith("1") || option.contains("log")) {
+                LoginPage loginPage = new LoginPage();
+                loginPage.display();
                 scanner.close();
-                return "LoginPage";
             }
             // Option 2: Sign up
             else if (option.startsWith("2") || option.contains("sign")) {
+                SignupPage signupPage = new SignupPage();
+                signupPage.display();
                 scanner.close();
                 return "SignupPage";
             }

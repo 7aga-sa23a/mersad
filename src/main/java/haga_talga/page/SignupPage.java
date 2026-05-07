@@ -1,5 +1,5 @@
 package haga_talga.page;
-
+import haga_talga.model.Doctor;
 import java.util.Scanner;
 
 // this class is for signup of doctors.
@@ -9,7 +9,8 @@ public class SignupPage {
     String username, password, repeatedPassword, ID;
 
     // take input from user in the default constructor
-    public SignupPage() {
+    public SignupPage() {}
+    public void display() {
         Scanner sc = new Scanner(System.in);
 
         // take Doctor name and save it in username variable
@@ -32,19 +33,18 @@ public class SignupPage {
 
             // if it matches save it in json file
             if (this.password.equals(this.repeatedPassword)) {
-                System.out.println("account created successfully");
-
-                // create a new doctor object and save it in json file
-               // Doctor doctor = new Doctor();
-               //int login = doctor.signUp(this.username, this.ID, this.password);
-               int login = 1;
+                Doctor doctor = new Doctor();
+               int login = doctor.signup(this.username, this.ID, this.password);
+            
                 if(login == 2){
                     // login page 
                     LoginPage loginPage = new LoginPage();
+                    loginPage.display();
+                    break;
                 }
+                System.out.println("account created successfully");
                 break;
             }
-
             // if it does not match ask to enter password again
             else {
                 System.out.println("Passwords do not match. Please enter password again: ");

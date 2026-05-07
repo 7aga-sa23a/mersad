@@ -1,6 +1,7 @@
 package haga_talga.model;
 
 import java.util.Scanner;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,16 +18,28 @@ public class Doctor {
     public int signup(String name, String id, String password) {
         Scanner sc = new Scanner(System.in);
 
-        String fileName = "data/doctors.json";
+        String fileName = "src/main/resources/doctors.json";
         JsonArray doctorsArray = new JsonArray();
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         // if id is already exist 
         boolean uniqueID = true;
+       try (FileReader reader = new FileReader(fileName)) {
+            JsonElement element = JsonParser.parseReader(reader);
+
+            if (element.isJsonArray()) {
+                doctorsArray = element.getAsJsonArray();
+            } else {
+                doctorsArray = new JsonArray();
+            }
+
+        } catch (Exception e) {
+            doctorsArray = new JsonArray();
+        }
         for (JsonElement element : doctorsArray) {
             String Id = element.getAsJsonObject()
-                    .get("ID")
+                    .get("id")
                     .getAsString();
 
             if (Id.equals(id)) {
@@ -34,25 +47,36 @@ public class Doctor {
                 break;
             }
         }
-        if (!uniqueID) {
+
             System.out.println(
-                    "ID already exists. Please enter :\n1- unique ID.\n2- login if you already have an account.");
+                    "ID should be unique and numbers only. Please enter :\n1- unique ID.\n2- login if you already have an account.");
+
             int choose = sc.nextInt();
             while (choose != 1 && choose != 2) {
                 System.out.println(
                         "Invalid choice. Please enter :\n1- unique ID.\n2- login if you already have an account.");
                 choose = sc.nextInt();
+                if (choose == 2) {
+                    return 2;
+                }
             }
-            if (choose == 2) {
-                return 2;
-            }
-            else {
+
+        while (!uniqueID || !id.matches("[0-9]+")) {
+            {
+                System.out.println("Enter unique ID: ");
                 id = sc.nextLine();
+                uniqueID = true;
+                for (JsonElement element : doctorsArray) {
+                    String Id = element.getAsJsonObject()
+                            .get("id")
+                            .getAsString();
+
+                    if (Id.equals(id)) {
+                        uniqueID = false;
+                        break;
+                    }
+                }
             }
-        }
-        while (!id.matches("[0-9]+")) {
-            System.out.println("ID should be numbers only. Please enter ID again: ");
-            id = sc.nextLine();
         }
 
         // constructor to create doctor object and save it in json file
@@ -73,6 +97,7 @@ public class Doctor {
         doctor.addProperty("name", name);
         doctor.addProperty("id", id);
         doctor.addProperty("password", password);
+        doctor.addProperty("courses", new JsonArray().toString());
 
         doctorsArray.add(doctor);
 
@@ -97,7 +122,8 @@ public class Doctor {
         }
 
         // ! FIXME: Program always prints "Data file not found. Please contact support."
-        String fileName = "../../../resources/doctors.json";
+        String fileName = "src/main/resources/doctors.json";
+       
         JsonArray doctorsArray;
         try (FileReader reader = new FileReader(fileName)) {
             JsonElement element = JsonParser.parseReader(reader);
@@ -113,17 +139,26 @@ public class Doctor {
         }
 
         for (JsonElement doctorElement : doctorsArray) {
-            JsonObject doctor = doctorElement.getAsJsonObject();
-            if (doctor.get("id").getAsString().equals(id) && doctor.get("password").getAsString().equals(password)) {
-                return 1;
-            }
-            if (doctor.get("id").getAsString().equals(id) && !doctor.get("password").getAsString().equals(password)) {
-                return -1;
-            }
-            if (!doctor.get("id").getAsString().equals(id) && doctor.get("password").getAsString().equals(password)) {
-                return 0;
-            }
+    JsonObject doctor = doctorElement.getAsJsonObject();
+    
+    if (!doctor.has("id") || !doctor.has("password")) {
+        continue;
+    }
+
+    String docId = doctor.get("id").getAsString();
+    String docPass = doctor.get("password").getAsString();
+
+    if (docId.equals(id)) {
+        if (docPass.equals(password)) {
+            return 1;
+        } else {
+            return -1; // wrong password
         }
+    }
+    else {
+        return 0; // id not found
+    }
+}
         return -3;
     }
 }

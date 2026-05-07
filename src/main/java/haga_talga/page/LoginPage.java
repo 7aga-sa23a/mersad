@@ -9,7 +9,8 @@ public class LoginPage {
     String ID, password;
 
     // take input from user in the default constructor
-    public LoginPage() {
+    public LoginPage() {}
+    public void display() {
         Scanner sc = new Scanner(System.in);
 
         // take Doctor ID and save it in ID variable and all should be unique and
@@ -53,6 +54,7 @@ public class LoginPage {
         } else if (login == 2) {
             // sign up page 
             SignupPage signup = new SignupPage();
+            signup.display();
         }
     
     }
