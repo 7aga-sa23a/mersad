@@ -79,7 +79,7 @@ public class Course {
 
     public void addStudent(String courseID, String studentName) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         new File("output").mkdirs();
         List<Course> courses = loadCourses(mapper, file);
 
@@ -99,7 +99,7 @@ public class Course {
 
     public void removeStudent(String courseID, String studentName) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
 
         if (!isCourseExist(courses, courseID)) {
@@ -122,7 +122,7 @@ public class Course {
 
     public ArrayList<String> getRegisteredStudent(String courseName) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
 
         for (Course course : courses) {
@@ -153,7 +153,7 @@ public class Course {
 
     public void editCourse(String courseID, String name, int year, int semester) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
 
         if (!isCourseExist(courses, courseID)) {
@@ -172,7 +172,7 @@ public class Course {
 
     public void deleteCourse(String courseID, String name) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
 
         if (!isCourseExist(courses, courseID)) {
