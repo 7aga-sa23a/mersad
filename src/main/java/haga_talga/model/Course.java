@@ -56,7 +56,7 @@ public class Course {
         this.semester = semester;
     }
 
-    private List<Course> loadCourses(ObjectMapper mapper, File file) throws Exception {
+    private static List<Course> loadCourses(ObjectMapper mapper, File file) throws Exception {
         if (!file.exists())
             return new ArrayList<>();
         return mapper.readValue(
@@ -64,12 +64,12 @@ public class Course {
                 mapper.getTypeFactory().constructCollectionType(List.class, Course.class));
     }
 
-    private void saveCourses(ObjectMapper mapper, File file, List<Course> courses) throws Exception {
+    private static void saveCourses(ObjectMapper mapper, File file, List<Course> courses) throws Exception {
         new File("output").mkdirs();
         mapper.writerWithDefaultPrettyPrinter().writeValue(file, courses);
     }
 
-    private boolean isCourseExist(List<Course> courses, String courseID) {
+    private static boolean isCourseExist(List<Course> courses, String courseID) {
         for (Course course : courses) {
             if (course.ID.equals(courseID))
                 return true;
@@ -137,15 +137,16 @@ public class Course {
 
     }
 
-    public void addCourse(String courseID, String name, int year, int semester) throws Exception {
+    public static void addCourse(String courseID, String name, int year, int semester) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
         Course course = new Course(courseID, name, year, semester);
         if (!isCourseExist(courses, courseID)) {
             courses.add(course);
+            System.out.println("Course added successfully.");
         } else {
-            System.out.println("This Course ia already Exist");
+            System.out.println("This Course already exists.");
         }
         saveCourses(mapper, file, courses);
     }
