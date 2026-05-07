@@ -9,6 +9,7 @@ import haga_talga.page.AddCoursePage;
 import haga_talga.page.ShowCoursesPage;
 import haga_talga.page.TakeAttendancePage;
 import haga_talga.page.EditAttendancePage;
+import haga_talga.page.DeleteCoursePage;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -39,7 +40,8 @@ public class Main {
                     "AddCoursePage", new AddCoursePage(),
                     "ShowCoursesPage", new ShowCoursesPage(),
                     "TakeAttendancePage", new TakeAttendancePage(),
-                    "EditAttendancePage", new EditAttendancePage()));
+                    "EditAttendancePage", new EditAttendancePage(),
+                    "DeleteCoursePage", new DeleteCoursePage()));
 
     public Main() {}
 
