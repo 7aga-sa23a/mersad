@@ -7,6 +7,7 @@ import haga_talga.page.SignupPage;
 import haga_talga.page.DashboardPage;
 import haga_talga.page.AddCoursePage;
 import haga_talga.page.ShowCoursesPage;
+import haga_talga.page.EditCoursePage;
 import haga_talga.page.TakeAttendancePage;
 
 import java.util.Map;
