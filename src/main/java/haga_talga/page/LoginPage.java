@@ -13,9 +13,11 @@ public final class LoginPage extends Page {
         
     }
 
+    @Override
     public String display() {
         // Dispaly the page details
         System.out.println("This is the login page.");
+        System.out.println();
 
         // ...
 

@@ -18,9 +18,11 @@ public final class ShowCoursesPage extends Page {
         
     }
 
+    @Override
     public String display() {
         // Dispaly the page details
         System.out.println("This is the show courses page.");
+        System.out.println();
 
         // ...
 
