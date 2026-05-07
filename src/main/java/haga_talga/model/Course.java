@@ -56,7 +56,7 @@ public class Course {
         this.semester = semester;
     }
 
-    private List<Course> loadCourses(ObjectMapper mapper, File file) throws Exception {
+    private static List<Course> loadCourses(ObjectMapper mapper, File file) throws Exception {
         if (!file.exists())
             return new ArrayList<>();
         return mapper.readValue(
@@ -64,12 +64,12 @@ public class Course {
                 mapper.getTypeFactory().constructCollectionType(List.class, Course.class));
     }
 
-    private void saveCourses(ObjectMapper mapper, File file, List<Course> courses) throws Exception {
+    private static void saveCourses(ObjectMapper mapper, File file, List<Course> courses) throws Exception {
         new File("output").mkdirs();
         mapper.writerWithDefaultPrettyPrinter().writeValue(file, courses);
     }
 
-    private boolean isCourseExist(List<Course> courses, String courseID) {
+    private static boolean isCourseExist(List<Course> courses, String courseID) {
         for (Course course : courses) {
             if (course.ID.equals(courseID))
                 return true;
@@ -150,13 +150,13 @@ public class Course {
         saveCourses(mapper, file, courses);
     }
 
-    public void editCourse(String courseID, String name, int year, int semester) throws Exception {
+    public static void editCourse(String courseID, String name, int year, int semester) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
 
         if (!isCourseExist(courses, courseID)) {
-            System.out.println("This Course is not Exist");
+            System.out.println("This Course does not exist.");
         } else {
             for (Course course : courses) {
                 if (course.ID.equals(courseID)) {
@@ -165,6 +165,8 @@ public class Course {
                     course.semester = semester;
                 }
             }
+
+            System.out.println("Course has be edited successfully.");
         }
         saveCourses(mapper, file, courses);
     }
@@ -182,5 +184,4 @@ public class Course {
         saveCourses(mapper, file, courses);
     }
 
-    
 }
