@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 import haga_talga.model.Course;
 
-public final class EditCoursesPage extends Page {
+public final class EditCoursePage extends Page {
     /**
      * Edit a course
      */
-    public EditCoursesPage() {
+    public EditCoursePage() {
 
     }
 
