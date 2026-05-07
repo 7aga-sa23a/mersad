@@ -23,10 +23,10 @@ public final class AddCoursePage extends Page {
 
         // Prompt for course details
         System.out.print("Course name: ");
-        String courseName = scanner.nextLine();
+        String courseName = scanner.nextLine().strip();
 
         System.out.print("Course code: ");
-        String courseCode = scanner.nextLine();
+        String courseCode = scanner.nextLine().strip();
 
         System.out.print("Course year: ");
         int courseYear = scanner.nextInt();
