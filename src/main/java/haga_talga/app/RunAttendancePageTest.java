@@ -21,6 +21,6 @@ public class RunAttendancePageTest {
         System.out.println("\n========================================");
         System.out.println("Test Finished!");
         System.out.println("The page successfully returned. Next page to navigate to: " + nextPage);
-        
+
     }
 }
