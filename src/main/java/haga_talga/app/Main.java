@@ -38,7 +38,6 @@ public class Main {
                     "DashboardPage", new DashboardPage(),
                     "AddCoursePage", new AddCoursePage(),
                     "ShowCoursesPage", new ShowCoursesPage(),
-                    "EditCoursePage", new EditCoursePage(),
                     "TakeAttendancePage", new TakeAttendancePage()));
 
     public Main() {}
