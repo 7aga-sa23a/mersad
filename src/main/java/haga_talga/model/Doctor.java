@@ -47,35 +47,34 @@ public class Doctor {
                 break;
             }
         }
-        if (!uniqueID) {
+
+        System.out.println(
+                "ID should be unique and numbers only. Please enter :\n1- unique ID.\n2- login if you already have an account.");
+
+        int choose = sc.nextInt();
+        while (choose != 1 && choose != 2) {
             System.out.println(
-                    "ID should be unique and numbers only. Please enter :\n1- unique ID.\n2- login if you already have an account.");
+                    "Invalid choice. Please enter :\n1- unique ID.\n2- login if you already have an account.");
+            choose = sc.nextInt();
+        }
+        if (choose == 2) {
+            return 2;
+        }
+        
+        sc.nextLine();
+        while (!uniqueID || !id.matches("[0-9]+")) {
+            {
+                System.out.println("Enter unique ID: ");
+                id = sc.nextLine();
+                uniqueID = true;
+                for (JsonElement element : doctorsArray) {
+                    String Id = element.getAsJsonObject()
+                            .get("id")
+                            .getAsString();
 
-            int choose = sc.nextInt();
-            while (choose != 1 && choose != 2) {
-                System.out.println(
-                        "Invalid choice. Please enter :\n1- unique ID.\n2- login if you already have an account.");
-                choose = sc.nextInt();
-            }
-            if (choose == 2) {
-                return 2;
-            }
-
-            sc.nextLine();
-            while (!uniqueID || !id.matches("[0-9]+")) {
-                {
-                    System.out.println("Enter unique ID: ");
-                    id = sc.nextLine();
-                    uniqueID = true;
-                    for (JsonElement element : doctorsArray) {
-                        String Id = element.getAsJsonObject()
-                                .get("id")
-                                .getAsString();
-
-                        if (Id.equals(id)) {
-                            uniqueID = false;
-                            break;
-                        }
+                    if (Id.equals(id)) {
+                        uniqueID = false;
+                        break;
                     }
                 }
             }
@@ -125,6 +124,7 @@ public class Doctor {
             return 2;
         }
 
+        // ! FIXME: Program always prints "Data file not found. Please contact support."
         String fileName = "src/main/resources/doctors.json";
 
         JsonArray doctorsArray;
@@ -157,9 +157,10 @@ public class Doctor {
                 } else {
                     return -1; // wrong password
                 }
+            } else {
+                return 0; // id not found
             }
         }
-
-        return 0; // id not found
+        return -3;
     }
 }
