@@ -20,9 +20,6 @@ public final class DeleteCoursePage extends Page {
         Scanner scanner = new Scanner(System.in);
 
         // Prompt for course details
-        System.out.print("Course name: ");
-        String courseName = scanner.nextLine().strip();
-
         System.out.print("Course code: ");
         String courseCode = scanner.nextLine().strip();
 
@@ -30,7 +27,7 @@ public final class DeleteCoursePage extends Page {
 
         // Confirm deletion
         System.out.println(
-                "Are you sure you want to delete the course " + courseName + " with code " + courseCode + "? (yes/no)");
+                "Are you sure you want to delete the course with code " + courseCode + "? (yes/no)");
         String confirmation = scanner.nextLine().strip().toLowerCase();
 
         if (!confirmation.equals("yes") && !confirmation.equals("y")) {
@@ -41,7 +38,7 @@ public final class DeleteCoursePage extends Page {
             try {
                 System.out.println("Deleting course...");
                 Thread.sleep(1000);
-                Course.deleteCourse(courseCode, courseName);
+                Course.deleteCourse(courseCode);
                 Thread.sleep(2000);
             } catch (Exception e) {
                 System.out.println("An error has occured while deleting the course.");

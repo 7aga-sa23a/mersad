@@ -170,7 +170,7 @@ public class Course {
         saveCourses(mapper, file, courses);
     }
 
-    public static void deleteCourse(String courseID, String name) throws Exception {
+    public static void deleteCourse(String courseID) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
