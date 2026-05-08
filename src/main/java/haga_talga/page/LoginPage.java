@@ -10,7 +10,7 @@ public final class LoginPage extends Page {
      * - Signup instead
      */
     public LoginPage() {
-        
+
     }
 
     @Override

@@ -19,7 +19,7 @@ public final class DeleteCoursePage extends Page {
         // Input scanner
         Scanner scanner = new Scanner(System.in);
 
-        // Prompt for course details
+        // Prompt for course code
         System.out.print("Course code: ");
         String courseCode = scanner.nextLine().strip();
 

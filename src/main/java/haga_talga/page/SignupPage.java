@@ -13,7 +13,7 @@ public final class SignupPage extends Page {
      * - - Registration was successful!
      */
     public SignupPage() {
-        
+
     }
 
     @Override
