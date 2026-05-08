@@ -10,6 +10,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,8 +60,8 @@ public class CourseStudentJsonService {
         public StudentData(String name, String id) {
             this.name = name;
             this.id = id;
-            this.attendedDays = 0;
-            this.lastAttendedDate = "";
+            this.attendedDays = 1;
+            this.lastAttendedDate = java.time.LocalDate.now().toString();
         }
     }
 
@@ -85,7 +86,7 @@ public class CourseStudentJsonService {
             return null;
         }
         try {
-            String json = new String(Files.readAllBytes(file.toPath()));
+            String json = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
             return gson.fromJson(json, CourseStudentsJson.class);
         } catch (IOException | JsonSyntaxException e) {
             System.out.println("[JSON] Error reading file: " + e.getMessage());
@@ -139,7 +140,7 @@ public class CourseStudentJsonService {
      * b-tsave el JSON f el mlaf
      */
     private boolean saveJsonToFile(String filePath, CourseStudentsJson jsonData, boolean isNewFile) {
-        try (Writer writer = new FileWriter(filePath)) {
+        try (Writer writer = new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8)) {
             gson.toJson(jsonData, writer);
             String action = isNewFile ? "Created" : "Updated";
             String fileName = new File(filePath).getName();

@@ -22,6 +22,12 @@ public final class TakeAttendancePage extends Page {
 
     // el constructor b-yجهز kol el services elly hn-7tagha
     public TakeAttendancePage() {
+        // b-nsale7 mshklet el araby f el terminal
+        try {
+            System.setOut(new java.io.PrintStream(new java.io.FileOutputStream(java.io.FileDescriptor.out), true, java.nio.charset.StandardCharsets.UTF_8.name()));
+        } catch (java.io.UnsupportedEncodingException e) {
+            // ignore
+        }
         this.courseReader = new CourseReader();
         this.cameraService = new CameraService();
         this.qrScannerService = new QRScannerService(cameraService);
