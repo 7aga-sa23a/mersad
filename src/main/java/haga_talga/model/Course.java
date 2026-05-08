@@ -56,7 +56,7 @@ public class Course {
         this.semester = semester;
     }
 
-    private static List<Course> loadCourses(ObjectMapper mapper, File file) throws Exception {
+    public static List<Course> loadCourses(ObjectMapper mapper, File file) throws Exception {
         if (!file.exists())
             return new ArrayList<>();
         return mapper.readValue(

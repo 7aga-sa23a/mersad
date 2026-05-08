@@ -19,7 +19,7 @@ public final class LoginPage extends Page {
         System.out.println("This is the login page.");
         System.out.println();
 
-        // ...
+        
 
         // Return the next page to navigate to
         return "DashboardPage";
