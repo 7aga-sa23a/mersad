@@ -28,11 +28,31 @@ public final class AddCoursePage extends Page {
         System.out.print("Course code: ");
         String courseCode = scanner.nextLine().strip();
 
-        System.out.print("Course year: ");
-        int courseYear = scanner.nextInt();
+        int courseYear;
+        int courseSemester;
 
-        System.out.print("Course semester: ");
-        int courseSemester = scanner.nextInt();
+        while (true) {
+            try {
+                System.out.print("Course year: ");
+                courseYear = scanner.nextInt();
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid input for course year. Please enter a valid integer.");
+                scanner.nextLine(); // Clear the invalid input
+                continue; // Prompt again
+            }
+        }
+        while(true) {
+            try {
+                System.out.print("Course semester: ");
+                courseSemester = scanner.nextInt();
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid input for course semester. Please enter a valid integer.");
+                scanner.nextLine(); // Clear the invalid input
+                continue; // Prompt again
+            }
+        }
 
         System.out.println();
 

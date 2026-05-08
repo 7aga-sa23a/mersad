@@ -18,11 +18,11 @@ public class LoginPage extends Page {
         // take Doctor ID and save it in ID variable and all should be unique and
         // numbers
         System.out.println("Enter Your ID: ");
-        this.ID = sc.nextLine();
+        String ID = sc.nextLine();
 
         // take Doctor password and save it in password variable and all should be
         System.out.println("Enter Your Password: ");
-        this.password = sc.nextLine();
+        String password = sc.nextLine();
 
         // create doctor object and save it in json file
         Doctor doctor = new Doctor();
@@ -43,9 +43,9 @@ public class LoginPage extends Page {
             }
 
             System.out.println("Enter Your ID: ");
-            this.ID = sc.nextLine();
+            ID = sc.nextLine();
             System.out.println("Enter Your Password: ");
-            this.password = sc.nextLine();
+            password = sc.nextLine();
             login = doctor.login(ID, password);
         }
         if (login == 1) {
