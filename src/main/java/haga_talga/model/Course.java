@@ -56,7 +56,7 @@ public class Course {
         this.semester = semester;
     }
 
-    private List<Course> loadCourses(ObjectMapper mapper, File file) throws Exception {
+    public static List<Course> loadCourses(ObjectMapper mapper, File file) throws Exception {
         if (!file.exists())
             return new ArrayList<>();
         return mapper.readValue(
@@ -64,12 +64,12 @@ public class Course {
                 mapper.getTypeFactory().constructCollectionType(List.class, Course.class));
     }
 
-    private void saveCourses(ObjectMapper mapper, File file, List<Course> courses) throws Exception {
+    private static void saveCourses(ObjectMapper mapper, File file, List<Course> courses) throws Exception {
         new File("output").mkdirs();
         mapper.writerWithDefaultPrettyPrinter().writeValue(file, courses);
     }
 
-    private boolean isCourseExist(List<Course> courses, String courseID) {
+    private static boolean isCourseExist(List<Course> courses, String courseID) {
         for (Course course : courses) {
             if (course.ID.equals(courseID))
                 return true;
@@ -79,7 +79,7 @@ public class Course {
 
     public void addStudent(String courseID, String studentName) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         new File("output").mkdirs();
         List<Course> courses = loadCourses(mapper, file);
 
@@ -99,7 +99,7 @@ public class Course {
 
     public void removeStudent(String courseID, String studentName) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
 
         if (!isCourseExist(courses, courseID)) {
@@ -122,7 +122,7 @@ public class Course {
 
     public ArrayList<String> getRegisteredStudent(String courseName) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
 
         for (Course course : courses) {
@@ -137,22 +137,23 @@ public class Course {
 
     }
 
-    public void addCourse(String courseID, String name, int year, int semester) throws Exception {
+    public static void addCourse(String courseID, String name, int year, int semester) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
         Course course = new Course(courseID, name, year, semester);
         if (!isCourseExist(courses, courseID)) {
             courses.add(course);
+            System.out.println("Course added successfully.");
         } else {
-            System.out.println("This Course ia already Exist");
+            System.out.println("This Course already exists.");
         }
         saveCourses(mapper, file, courses);
     }
 
-    public void editCourse(String courseID, String name, int year, int semester) throws Exception {
+    public static void editCourse(String courseID, String name, int year, int semester) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
 
         if (!isCourseExist(courses, courseID)) {
@@ -169,13 +170,13 @@ public class Course {
         saveCourses(mapper, file, courses);
     }
 
-    public void deleteCourse(String courseID, String name) throws Exception {
+    public static void deleteCourse(String courseID) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("output/courses.json");
+        File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
 
         if (!isCourseExist(courses, courseID)) {
-            System.out.println("This Course is not Exist");
+            System.out.println("This Course doesn't Exist");
         } else {
             courses.removeIf(course -> courseID.equals(course.ID));
         }
