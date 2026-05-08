@@ -1,4 +1,5 @@
 package haga_talga.util;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -301,8 +302,24 @@ public class AsciiFormatterUtil {
      * Btemse7 el console 5ales (Clear Screen).
      */
     public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        final String os = System.getProperty("os.name");
+        
+        // Windows approach
+        if (os.contains("Windows")) {
+            try {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } catch (IOException | InterruptedException e1) {
+                e1.printStackTrace();
+            }
+        }
+        // Any other OS
+        else {
+            try {
+                new ProcessBuilder("clear").inheritIO().start().waitFor();
+            } catch (IOException | InterruptedException e2) {
+                e2.printStackTrace();
+            }
+        }
     }
 
     /** Resalet naga7 (Success) b 5alfeya 5adra */
