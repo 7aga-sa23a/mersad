@@ -7,7 +7,7 @@ public final class TakeAttendancePage extends Page {
      * - Connected with JSON database
      */
     public TakeAttendancePage() {
-        
+
     }
 
     @Override
