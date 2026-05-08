@@ -8,6 +8,7 @@ import haga_talga.page.DashboardPage;
 import haga_talga.page.AddCoursePage;
 import haga_talga.page.ShowCoursesPage;
 import haga_talga.page.TakeAttendancePage;
+import haga_talga.page.ShowCourseAttendancePage;
 import haga_talga.page.DeleteCoursePage;
 import haga_talga.util.AsciiFormatterUtil;
 
@@ -41,6 +42,7 @@ public class Main {
                     "AddCoursePage", new AddCoursePage(),
                     "ShowCoursesPage", new ShowCoursesPage(),
                     "TakeAttendancePage", new TakeAttendancePage(),
+                    "ShowCourseAttendancePage", new ShowCourseAttendancePage(),
                     "DeleteCoursePage", new DeleteCoursePage()));
 
     public Main() {
@@ -85,5 +87,6 @@ public class Main {
                 System.exit(2);
             }
         }
+        
     }
 }
