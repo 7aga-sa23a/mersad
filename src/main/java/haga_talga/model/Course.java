@@ -172,13 +172,13 @@ public class Course {
         saveCourses(mapper, file, courses);
     }
 
-    public void deleteCourse(String courseID, String name) throws Exception {
+    public static void deleteCourse(String courseID) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("src/main/resources/courses.json");
         List<Course> courses = loadCourses(mapper, file);
 
         if (!isCourseExist(courses, courseID)) {
-            System.out.println("This Course is not Exist");
+            System.out.println("This Course does not exist.");
         } else {
             courses.removeIf(course -> courseID.equals(course.ID));
         }
