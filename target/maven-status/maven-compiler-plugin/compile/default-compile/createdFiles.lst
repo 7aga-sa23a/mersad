@@ -6,7 +6,6 @@ haga_talga\page\LoginPage.class
 haga_talga\page\Page.class
 haga_talga\page\OnboardingPage.class
 haga_talga\page\AddCoursePage.class
-haga_talga\page\EditAttendancePage.class
 haga_talga\app\Main.class
 haga_talga\page\TakeAttendancePage.class
 haga_talga\page\SignupPage.class
