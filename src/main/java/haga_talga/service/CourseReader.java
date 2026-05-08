@@ -23,7 +23,7 @@ import java.util.List;
 public class CourseReader {
 
     /** Data file path */
-    private static final String DATA_FILE = "output/courses.json";
+    private static final String DATA_FILE = "src/main/resources/courses.json";
 
     /** Date format */
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
