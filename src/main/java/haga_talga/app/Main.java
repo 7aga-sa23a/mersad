@@ -9,6 +9,7 @@ import haga_talga.page.AddCoursePage;
 import haga_talga.page.ShowCoursesPage;
 import haga_talga.page.TakeAttendancePage;
 import haga_talga.page.EditAttendancePage;
+import haga_talga.page.ShowCourseAttendancePage;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -39,7 +40,9 @@ public class Main {
                     "AddCoursePage", new AddCoursePage(),
                     "ShowCoursesPage", new ShowCoursesPage(),
                     "TakeAttendancePage", new TakeAttendancePage(),
-                    "EditAttendancePage", new EditAttendancePage()));
+                    "EditAttendancePage", new EditAttendancePage(),
+                    "ShowCourseAttendancePage", new ShowCourseAttendancePage())
+                );
 
 
     public Main() {}
@@ -51,36 +54,38 @@ public class Main {
      */
     public static void main(String[] args) {
         // Starting page
-        final OnboardingPage onboardingPage = (OnboardingPage) pageMap.get("OnboardingPage");
-        String nextPageName = onboardingPage.display();
+        // final OnboardingPage onboardingPage = (OnboardingPage) pageMap.get("OnboardingPage");
+        // String nextPageName = onboardingPage.display();
 
-        // While there is a page to navigate to
-        while (nextPageName != null) {
-            // If the page to navigate to exists in the page map
-            if (pageMap.containsKey(nextPageName)) {
-                // Get the page object
-                Object nextPageObject = pageMap.get(nextPageName);
+        // // While there is a page to navigate to
+        // while (nextPageName != null) {
+        //     // If the page to navigate to exists in the page map
+        //     if (pageMap.containsKey(nextPageName)) {
+        //         // Get the page object
+        //         Object nextPageObject = pageMap.get(nextPageName);
 
-                // All page classes inherit from a super class called "Page" which has a
-                // "display" method. The display method can not be used directly from the page
-                // map since the compiler does not know for sure if this object is a page, for
-                // this reason we check if the object is indeed a page.
-                if (nextPageObject instanceof Page) {
-                    Page nextPage = (Page) nextPageObject;
-                    nextPageName = nextPage.display();
-                } else {
-                    // If the object is not a page, then it is not a valid page
-                    System.out.println("Invalid page: " + nextPageName);
-                    System.out.println("Exiting program...");
-                    System.exit(1);
-                }
-            } else {
-                // If the page to navigate to does not exist in the page map, then it is not a
-                // valid page
-                System.out.println("Invalid page: " + nextPageName);
-                System.out.println("Exiting program...");
-                System.exit(2);
-            }
-        }
+        //         // All page classes inherit from a super class called "Page" which has a
+        //         // "display" method. The display method can not be used directly from the page
+        //         // map since the compiler does not know for sure if this object is a page, for
+        //         // this reason we check if the object is indeed a page.
+        //         if (nextPageObject instanceof Page) {
+        //             Page nextPage = (Page) nextPageObject;
+        //             nextPageName = nextPage.display();
+        //         } else {
+        //             // If the object is not a page, then it is not a valid page
+        //             System.out.println("Invalid page: " + nextPageName);
+        //             System.out.println("Exiting program...");
+        //             System.exit(1);
+        //         }
+        //     } else {
+        //         // If the page to navigate to does not exist in the page map, then it is not a
+        //         // valid page
+        //         System.out.println("Invalid page: " + nextPageName);
+        //         System.out.println("Exiting program...");
+        //         System.exit(2);
+        //     }
+        // }
+        ShowCourseAttendancePage course = new ShowCourseAttendancePage();
+        course.display();
     }
 }
