@@ -15,7 +15,7 @@ public final class ShowCoursesPage extends Page {
      * - - 70% ≤ Green (Safe)
      */
     public ShowCoursesPage() {
-        
+
     }
 
     @Override

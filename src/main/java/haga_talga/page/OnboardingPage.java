@@ -13,7 +13,7 @@ public final class OnboardingPage extends Page {
      * - Exit option
      */
     public OnboardingPage() {
-        
+
     }
 
     @Override

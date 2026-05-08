@@ -1,15 +1,18 @@
-[ {
-  "ID" : "CS205",
-  "name" : "Programming 2 (OOP)",
-  "year" : 2026,
-  "semester" : 2,
-  "Students" : [ ],
-  "id" : "CS205"
-}, {
-  "ID" : "201",
-  "name" : "Programming 2 (OOP)",
-  "year" : 2026,
-  "semester" : 2,
-  "Students" : [ ],
-  "id" : "201"
-} ]
+[
+  {
+    "ID": "CS205",
+    "name": "Programming 2 (OOP)",
+    "year": 2026,
+    "semester": 2,
+    "Students": [],
+    "id": "CS205"
+  },
+  {
+    "ID": "201",
+    "name": "Programming 2 (OOP)",
+    "year": 2026,
+    "semester": 2,
+    "Students": [],
+    "id": "201"
+  }
+]

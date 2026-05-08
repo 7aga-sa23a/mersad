@@ -11,7 +11,6 @@ import haga_talga.page.TakeAttendancePage;
 import haga_talga.page.EditAttendancePage;
 import haga_talga.util.AsciiFormatterUtil;
 
-
 import java.util.Map;
 import java.util.HashMap;
 
@@ -33,9 +32,6 @@ public class Main {
      * use.
      */
 
-
-
-
     private static final Map<String, Object> pageMap = new HashMap<>(
             Map.of(
                     "OnboardingPage", new OnboardingPage(),
@@ -47,7 +43,8 @@ public class Main {
                     "TakeAttendancePage", new TakeAttendancePage(),
                     "EditAttendancePage", new EditAttendancePage()));
 
-    public Main() {}
+    public Main() {
+    }
 
     /**
      * The main method that handles the program flow.

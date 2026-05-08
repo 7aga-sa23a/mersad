@@ -183,5 +183,4 @@ public class Course {
         saveCourses(mapper, file, courses);
     }
 
-    
 }
