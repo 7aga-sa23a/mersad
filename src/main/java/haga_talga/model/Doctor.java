@@ -23,9 +23,9 @@ public class Doctor {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        // if id is already exist 
+        // if id is already exist
         boolean uniqueID = true;
-       try (FileReader reader = new FileReader(fileName)) {
+        try (FileReader reader = new FileReader(fileName)) {
             JsonElement element = JsonParser.parseReader(reader);
 
             if (element.isJsonArray()) {
@@ -48,19 +48,20 @@ public class Doctor {
             }
         }
 
+        System.out.println(
+                "ID should be unique and numbers only. Please enter :\n1- unique ID.\n2- login if you already have an account.");
+
+        int choose = sc.nextInt();
+        while (choose != 1 && choose != 2) {
             System.out.println(
-                    "ID should be unique and numbers only. Please enter :\n1- unique ID.\n2- login if you already have an account.");
-
-            int choose = sc.nextInt();
-            while (choose != 1 && choose != 2) {
-                System.out.println(
-                        "Invalid choice. Please enter :\n1- unique ID.\n2- login if you already have an account.");
-                choose = sc.nextInt();
-            }
-            if (choose == 2) {
-                return 2;
-            }
-
+                    "Invalid choice. Please enter :\n1- unique ID.\n2- login if you already have an account.");
+            choose = sc.nextInt();
+        }
+        if (choose == 2) {
+            return 2;
+        }
+        
+        sc.nextLine();
         while (!uniqueID || !id.matches("[0-9]+")) {
             {
                 System.out.println("Enter unique ID: ");
@@ -111,10 +112,12 @@ public class Doctor {
         return 0;
     }
 
-    // check login of doctor by checking if the ID and password match with the ones in the json file
+    // check login of doctor by checking if the ID and password match with the ones
+    // in the json file
     public int login(String id, String password) {
 
-        // if doctor enters "signup" in either ID or password, return 2 to go to signup page
+        // if doctor enters "signup" in either ID or password, return 2 to go to signup
+        // page
         String test1 = id.toLowerCase();
         String test2 = password.toLowerCase();
         if (test1.equals("signup") || test2.equals("signup")) {
@@ -123,7 +126,7 @@ public class Doctor {
 
         // ! FIXME: Program always prints "Data file not found. Please contact support."
         String fileName = "src/main/resources/doctors.json";
-       
+
         JsonArray doctorsArray;
         try (FileReader reader = new FileReader(fileName)) {
             JsonElement element = JsonParser.parseReader(reader);
@@ -139,26 +142,25 @@ public class Doctor {
         }
 
         for (JsonElement doctorElement : doctorsArray) {
-    JsonObject doctor = doctorElement.getAsJsonObject();
-    
-    if (!doctor.has("id") || !doctor.has("password")) {
-        continue;
-    }
+            JsonObject doctor = doctorElement.getAsJsonObject();
 
-    String docId = doctor.get("id").getAsString();
-    String docPass = doctor.get("password").getAsString();
+            if (!doctor.has("id") || !doctor.has("password")) {
+                continue;
+            }
 
-    if (docId.equals(id)) {
-        if (docPass.equals(password)) {
-            return 1;
-        } else {
-            return -1; // wrong password
+            String docId = doctor.get("id").getAsString();
+            String docPass = doctor.get("password").getAsString();
+
+            if (docId.equals(id)) {
+                if (docPass.equals(password)) {
+                    return 1;
+                } else {
+                    return -1; // wrong password
+                }
+            } else {
+                return 0; // id not found
+            }
         }
-    }
-    else {
-        return 0; // id not found
-    }
-}
         return -3;
     }
 }

@@ -56,7 +56,7 @@ public class LoginPage extends Page {
             return "SignupPage";
         } else {
             return "OnboardingPage";
-        }
+        }   
 
     }
 }
