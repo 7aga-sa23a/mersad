@@ -157,7 +157,7 @@ public class Course {
         List<Course> courses = loadCourses(mapper, file);
 
         if (!isCourseExist(courses, courseID)) {
-            System.out.println("This Course does not exist.");
+            System.out.println("This Course is not Exist");
         } else {
             for (Course course : courses) {
                 if (course.ID.equals(courseID)) {
@@ -166,8 +166,6 @@ public class Course {
                     course.semester = semester;
                 }
             }
-
-            System.out.println("Course has be edited successfully.");
         }
         saveCourses(mapper, file, courses);
     }
@@ -178,11 +176,12 @@ public class Course {
         List<Course> courses = loadCourses(mapper, file);
 
         if (!isCourseExist(courses, courseID)) {
-            System.out.println("This Course is not Exist");
+            System.out.println("This Course doesn't Exist");
         } else {
             courses.removeIf(course -> courseID.equals(course.ID));
         }
         saveCourses(mapper, file, courses);
     }
 
+    
 }
