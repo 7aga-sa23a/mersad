@@ -72,6 +72,7 @@ public final class ShowCourseAttendancePage extends Page {
                 }
             } catch (Exception e) {
                 System.out.println("An error has occured while fetching course attendance.");
+                System.out.println("Are you sure you have taken attendance for this course before?");
                 System.out.println(e.getMessage());
                 return "ShowCourseAttendancePage";
             }
