@@ -82,7 +82,7 @@ public class CourseData {
         if (o == null || getClass() != o.getClass()) return false;
         CourseData course = (CourseData) o;
         return Objects.equals(name, course.name) &&
-               Objects.equals(courseCode, course.courseCode);
+            Objects.equals(courseCode, course.courseCode);
     }
 
     @Override
