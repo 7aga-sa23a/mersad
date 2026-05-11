@@ -2,7 +2,6 @@ package haga_talga.page;
 
 import java.io.File;
 import java.util.List;
-import java.util.Scanner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

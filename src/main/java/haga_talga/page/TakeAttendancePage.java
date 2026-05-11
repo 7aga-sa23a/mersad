@@ -1,15 +1,14 @@
 package haga_talga.page;
 
+import haga_talga.app.Main;
 import haga_talga.model.CourseData;
 import haga_talga.model.Student;
-import haga_talga.service.CourseReader;
-import haga_talga.service.CameraService;
-import haga_talga.service.QRScannerService;
 import haga_talga.service.AttendanceService;
+import haga_talga.service.CameraService;
+import haga_talga.service.CourseReader;
 import haga_talga.service.ExcelExportService;
-
+import haga_talga.service.QRScannerService;
 import java.util.List;
-import java.util.Scanner;
 
 // el class da hwa sf7et a5d el 8yab w el 7door b-st5dam el QR Scanner
 public final class TakeAttendancePage extends Page {
@@ -18,7 +17,6 @@ public final class TakeAttendancePage extends Page {
     private final QRScannerService qrScannerService;
     private final AttendanceService attendanceService;
     private final ExcelExportService excelService;
-    private final Scanner scanner;
 
     // el constructor b-yجهز kol el services elly hn-7tagha
     public TakeAttendancePage() {
@@ -33,7 +31,6 @@ public final class TakeAttendancePage extends Page {
         this.qrScannerService = new QRScannerService(cameraService);
         this.attendanceService = new AttendanceService(courseReader);
         this.excelService = new ExcelExportService();
-        this.scanner = new Scanner(System.in);
     }
 
     // b-tzhr el sf7a w tbda2 el workflow bta3 a5d el 8yab
@@ -58,7 +55,7 @@ public final class TakeAttendancePage extends Page {
         if (courses.isEmpty()) {
             System.out.println("No course available. Please add a course first.");
             System.out.println("Press Enter to return to Dashboard...");
-            scanner.nextLine();
+            Main.scanner.nextLine();
             return false;
         }
 
@@ -70,7 +67,7 @@ public final class TakeAttendancePage extends Page {
         System.out.print("Select (0 to cancel): ");
 
         try {
-            int choice = Integer.parseInt(scanner.nextLine().trim());
+            int choice = Integer.parseInt(Main.scanner.nextLine().trim());
             if (choice == 0) return false;
 
             CourseData course = courseReader.getCourse(choice - 1);
@@ -131,7 +128,7 @@ public final class TakeAttendancePage extends Page {
 
             try {
                 if (System.in.available() > 0) {
-                    String input = scanner.nextLine().trim();
+                    String input = Main.scanner.nextLine().trim();
                     if (input.equalsIgnoreCase("y")) {
                         saveAndQuit();
                         actionTaken = true;
@@ -161,7 +158,7 @@ public final class TakeAttendancePage extends Page {
         }
         
         System.out.println("\nPress Enter to return to Dashboard...");
-        scanner.nextLine();
+        Main.scanner.nextLine();
     }
 
     // b-twa2f el camera w t-save el Excel w el JSON

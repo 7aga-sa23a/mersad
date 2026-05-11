@@ -1,5 +1,5 @@
 package haga_talga.page;
-import java.util.Scanner;
+import haga_talga.app.Main;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -21,13 +21,9 @@ public final class ShowCourseAttendancePage extends Page {
     }
 
     public String display() {
-        // Dispaly the page details
-        System.out.println("This is the show course attendance page.");
-
         // ask doctor to enter course id to show its student attendance
-        Scanner input = new Scanner(System.in);
         System.out.print("Enter course ID to show its attendance or enter 'back' to return to the dashboard: ");
-        String courseId = input.nextLine();
+        String courseId = Main.scanner.nextLine();
         if (courseId.equalsIgnoreCase("back")) {
             DashboardPage dashboardPage = new DashboardPage();
             dashboardPage.display();
@@ -63,7 +59,7 @@ public final class ShowCourseAttendancePage extends Page {
         // Return the next page to navigate to
         System.out
                 .println("Enter 'back' to return to the dashboard or enter another course ID to show its attendance: ");
-        String nextAction = input.nextLine();
+        String nextAction = Main.scanner.nextLine();
         if (nextAction.equalsIgnoreCase("back")) {
             DashboardPage dashboardPage = new DashboardPage();
             dashboardPage.display();

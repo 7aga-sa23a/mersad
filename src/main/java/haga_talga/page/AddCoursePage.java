@@ -1,7 +1,6 @@
 package haga_talga.page;
 
-import java.util.Scanner;
-
+import haga_talga.app.Main;
 import haga_talga.model.Course;
 
 public final class AddCoursePage extends Page {
@@ -19,14 +18,12 @@ public final class AddCoursePage extends Page {
     @Override
     public String display() {
         // Input scanner
-        Scanner scanner = new Scanner(System.in);
-
         // Prompt for course details
         System.out.print("Course name: ");
-        String courseName = scanner.nextLine().strip();
+        String courseName = Main.scanner.nextLine().strip();
 
         System.out.print("Course code: ");
-        String courseCode = scanner.nextLine().strip();
+        String courseCode = Main.scanner.nextLine().strip();
 
         int courseYear;
         int courseSemester;
@@ -34,22 +31,22 @@ public final class AddCoursePage extends Page {
         while (true) {
             try {
                 System.out.print("Course year: ");
-                courseYear = scanner.nextInt();
+                courseYear = Main.scanner.nextInt();
                 break;
             } catch (Exception e) {
                 System.out.println("Invalid input for course year. Please enter a valid integer.");
-                scanner.nextLine(); // Clear the invalid input
+                Main.scanner.nextLine(); // Clear the invalid input
                 continue; // Prompt again
             }
         }
         while(true) {
             try {
                 System.out.print("Course semester: ");
-                courseSemester = scanner.nextInt();
+                courseSemester = Main.scanner.nextInt();
                 break;
             } catch (Exception e) {
                 System.out.println("Invalid input for course semester. Please enter a valid integer.");
-                scanner.nextLine(); // Clear the invalid input
+                Main.scanner.nextLine(); // Clear the invalid input
                 continue; // Prompt again
             }
         }

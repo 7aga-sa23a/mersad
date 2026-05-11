@@ -1,7 +1,7 @@
 package haga_talga.page;
 
+import haga_talga.app.Main;
 import haga_talga.model.Doctor;
-import java.util.Scanner;
 
 // this class is for login of doctors.
 public class LoginPage extends Page {
@@ -13,16 +13,14 @@ public class LoginPage extends Page {
     }
 
     public String display() {
-        Scanner sc = new Scanner(System.in);
-
         // take Doctor ID and save it in ID variable and all should be unique and
         // numbers
         System.out.println("Enter Your ID: ");
-        String ID = sc.nextLine();
+        String ID = Main.scanner.nextLine();
 
         // take Doctor password and save it in password variable and all should be
         System.out.println("Enter Your Password: ");
-        String password = sc.nextLine();
+        String password = Main.scanner.nextLine();
 
         // create doctor object and save it in json file
         Doctor doctor = new Doctor();
@@ -43,9 +41,9 @@ public class LoginPage extends Page {
             }
 
             System.out.println("Enter Your ID: ");
-            ID = sc.nextLine();
+            ID = Main.scanner.nextLine();
             System.out.println("Enter Your Password: ");
-            password = sc.nextLine();
+            password = Main.scanner.nextLine();
             login = doctor.login(ID, password);
         }
         if (login == 1) {

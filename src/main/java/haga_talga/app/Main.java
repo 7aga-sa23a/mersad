@@ -1,38 +1,38 @@
 package haga_talga.app;
 
-import haga_talga.page.Page;
-import haga_talga.page.OnboardingPage;
-import haga_talga.page.LoginPage;
-import haga_talga.page.SignupPage;
-import haga_talga.page.DashboardPage;
 import haga_talga.page.AddCoursePage;
-import haga_talga.page.ShowCoursesPage;
-import haga_talga.page.TakeAttendancePage;
-import haga_talga.page.ShowCourseAttendancePage;
+import haga_talga.page.DashboardPage;
 import haga_talga.page.DeleteCoursePage;
-import haga_talga.util.AsciiFormatterUtil;
-
-import java.util.Map;
+import haga_talga.page.LoginPage;
+import haga_talga.page.OnboardingPage;
+import haga_talga.page.Page;
+import haga_talga.page.ShowCourseAttendancePage;
+import haga_talga.page.ShowCoursesPage;
+import haga_talga.page.SignupPage;
+import haga_talga.page.TakeAttendancePage;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 // Run the program using the following command: java Main.java
 // Or use this shortcut in VS Code: Ctrl + F5
-
 /**
- * This program is a Java OOP Attendance System using QR code
- * simulation to manage students, materials, and attendance tracking.
- * 
+ * This program is a Java OOP Attendance System using QR code simulation to
+ * manage students, materials, and attendance tracking.
+ *
  * @author 7aga-sa23a
  * @since 2026-04-24
  * @version v0.3.0
  */
 public class Main {
-    /**
-     * This variable maps page names to page objects so they can be easily called by
-     * just their name. It also calls page constructors so that pages are ready to
-     * use.
-     */
 
+    public static final Scanner scanner = new Scanner(System.in);
+
+    /**
+     * This variable maps page names to page objects so they can be easily
+     * called by just their name. It also calls page constructors so that pages
+     * are ready to use.
+     */
     private static final Map<String, Object> pageMap = new HashMap<>(
             Map.of(
                     "OnboardingPage", new OnboardingPage(),
@@ -50,14 +50,15 @@ public class Main {
 
     /**
      * The main method that handles the program flow.
-     * 
+     *
      * @param args
      */
+    @SuppressWarnings("ConvertToTryWithResources")
     public static void main(String[] args) {
 
         // Starting page
         final OnboardingPage onboardingPage = (OnboardingPage) pageMap.get("OnboardingPage");
-        String nextPageName = onboardingPage.display();
+        String nextPageName = onboardingPage.display().strip();
 
         // While there is a page to navigate to
         while (nextPageName != null) {
@@ -79,14 +80,19 @@ public class Main {
                     System.out.println("Exiting program...");
                     System.exit(1);
                 }
-            } else {
-                // If the page to navigate to does not exist in the page map, then it is not a
-                // valid page
+            } // If the page to navigate to is "exit", then exit the program
+            else if (nextPageName.toLowerCase().contains("exit")) {
+                System.out.println("Exiting program...");
+                scanner.close();
+                System.exit(0);
+            } // If the page to navigate to does not exist in the page map, then it is not valid
+            else {
                 System.out.println("Invalid page: " + nextPageName);
                 System.out.println("Exiting program...");
+                scanner.close();
                 System.exit(2);
             }
         }
-        
+
     }
 }

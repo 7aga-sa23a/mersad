@@ -1,7 +1,8 @@
 package haga_talga.page;
 
+import haga_talga.app.Main;
 import haga_talga.model.Doctor;
-import java.util.Scanner;
+
 
 // this class is for signup of doctors.
 public class SignupPage extends Page {
@@ -14,25 +15,23 @@ public class SignupPage extends Page {
     }
 
     public String display() {
-        Scanner sc = new Scanner(System.in);
-
         // take Doctor name and save it in username variable
         System.out.println("Enter username: ");
-        String username = sc.nextLine();
+        String username = Main.scanner.nextLine();
 
         // take Doctor ID and save it in ID variable and all should be unique and
         // numbers
         System.out.println("Enter ID: ");
-        String ID = sc.nextLine();
+        String ID = Main.scanner.nextLine();
 
         // take Doctor password and save it in password variable, and ask to repeat the
         // password until it matches with the first one.
         System.out.println("Enter password: ");
-        String password = sc.nextLine();
+        String password = Main.scanner.nextLine();
 
         while (true) {
             System.out.println("Enter password again: ");
-            String repeatedPassword = sc.nextLine();
+            String repeatedPassword = Main.scanner.nextLine();
 
             // if it matches save it in json file
             if (password.equals(repeatedPassword)) {

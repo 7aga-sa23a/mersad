@@ -1,6 +1,7 @@
 package haga_talga.page;
 
-import java.util.Scanner;
+import haga_talga.app.Main;
+
 
 public final class DashboardPage extends Page {
     public DashboardPage() {
@@ -24,8 +25,7 @@ public final class DashboardPage extends Page {
 
         // Keep prompting the user to choose an option, until they make a valid choice
         while (true) {
-            Scanner scanner = new Scanner(System.in);
-            String option = scanner.nextLine().strip().toLowerCase();
+            String option = Main.scanner.nextLine().strip().toLowerCase();
             System.out.println();
 
             // Validate the user's choice
@@ -54,8 +54,7 @@ public final class DashboardPage extends Page {
     
             // Option 7: Exit program
             else if (option.startsWith("6") || option.contains("exit")) {
-                System.out.println("Exiting the program...\n");
-                System.exit(0);
+                return "exit";
             }
             // Invalid option
             else {

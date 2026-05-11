@@ -1,7 +1,6 @@
 package haga_talga.page;
 
-import java.util.Scanner;
-
+import haga_talga.app.Main;
 import haga_talga.model.Course;
 
 public final class DeleteCoursePage extends Page {
@@ -16,19 +15,16 @@ public final class DeleteCoursePage extends Page {
      * message and return to the dashboard
      */
     public String display() {
-        // Input scanner
-        Scanner scanner = new Scanner(System.in);
-
         // Prompt for course code
         System.out.print("Course code: ");
-        String courseCode = scanner.nextLine().strip();
+        String courseCode = Main.scanner.nextLine().strip();
 
         System.out.println();
 
         // Confirm deletion
         System.out.println(
                 "Are you sure you want to delete the course with code " + courseCode + "? (yes/no)");
-        String confirmation = scanner.nextLine().strip().toLowerCase();
+        String confirmation = Main.scanner.nextLine().strip().toLowerCase();
 
         if (!confirmation.equals("yes") && !confirmation.equals("y")) {
             System.out.println("Course deletion cancelled.");
