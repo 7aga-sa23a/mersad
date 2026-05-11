@@ -1,80 +1,38 @@
 [
   {
-    "name": "basmola",
-    "id": "111",
-    "password": "basmola",
-    "courses": "[]"
-  },
-  {
-    "name": "karim ",
-    "id": "15",
-    "password": "karimskee",
-    "courses": "[]"
-  },
-  {
-    "name": "huda",
+    "name": "Basmala Mohammed",
     "id": "1",
-    "password": "huda",
+    "password": "Basmala",
     "courses": "[]"
   },
   {
-    "name": "hi",
-    "id": "4",
-    "password": "hi",
-    "courses": "[]"
-  },
-  {
-    "name": "dod",
-    "id": "55",
-    "password": "dod",
-    "courses": "[]"
-  },
-  {
-    "name": "Not Karimskee",
-    "id": "00000",
-    "password": "hehe",
-    "courses": "[]"
-  },
-  {
-    "name": "Not Really Karimskee",
-    "id": "0521412",
-    "password": "hehqe",
-    "courses": "[]"
-  },
-  {
-    "name": "Not really heck Karimskee",
-    "id": "2195134",
-    "password": "heqeme",
-    "courses": "[]"
-  },
-  {
-    "name": "Not so Karimskee",
+    "name": "Huda Amr",
     "id": "2",
-    "password": "hehe",
+    "password": "Huda",
     "courses": "[]"
   },
   {
-    "name": "loli",
-    "id": "9",
-    "password": "loli",
+    "name": "Karim Ghazy",
+    "id": "3",
+    "password": "Karim",
     "courses": "[]"
   },
   {
-    "name": "baba",
-    "id": "88",
-    "password": "baba",
+    "name": "Rahma Atia",
+    "id": "4",
+    "password": "Rahma",
     "courses": "[]"
   },
   {
-    "name": "sad",
-    "id": "999",
-    "password": "sad",
+    "name": "Shrouk Atef",
+    "id": "5",
+    "password": "Shrouk",
     "courses": "[]"
   },
   {
-    "name": "alaa",
-    "id": "0",
-    "password": "alaa",
+    "name": "Abdelrahman Zauzau",
+    "id": "6",
+    "password": "Abdelrahman",
     "courses": "[]"
   }
 ]
