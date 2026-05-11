@@ -1,14 +1,20 @@
 package src.app;
 
-// Run the program using the following command: java Main.java
-
 /**
- * This program is a Java OOP Attendance System using QR code
+ * <h1>Mersad</h1>
+ * This program is a Java OOP Attendance System using QR code <br>
  * simulation to manage students, materials, and attendance tracking.
  * 
+ * <h3>Usage</h3>
+ * <ul>
+ *   <li><b>Compile:</b> <code>mvn compile</code></li>
+ *   <li><b>Convert to .jar:</b> <code>mvn package</code></li>
+ *   <li><b>Compile & run:</b> <code>mvn exec:java</code></li>
+ *   <li><b>Hide info messages:</b> add -q to the command</li>
+ *   <li><b>Show debug messages:</b> add -X to the command</li>
+ * </ul>
+ *
  * @author 7aga-sa23a
- * @since 2026-04-24
- * @version v0.1.0
  */
 public class Main {
     /**
