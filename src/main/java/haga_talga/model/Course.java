@@ -25,6 +25,11 @@ public class Course {
         this.Students = new ArrayList<>();
     }
 
+    @Override // from object class
+    public String toString() {
+        return "Course Info: [" + ID + "] " + name + " - Year: " + year + ", Sem: " + semester;
+    }
+
     public String getID() {
         return ID;
     }
@@ -99,6 +104,11 @@ public class Course {
             System.out.println("This Course doesnt Exist , try again");
         }
 
+    }
+    public void addStudent(List<String> newStudents) throws Exception {
+        this.Students.addAll(newStudents);
+        System.out.println(newStudents.size() + " students added to course " + this.name);
+        
     }
 
     public void removeStudent(String courseID, String studentName) throws Exception {

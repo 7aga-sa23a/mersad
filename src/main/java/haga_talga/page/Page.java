@@ -12,4 +12,7 @@ public class Page {
     public String display() {
         return null;
     }
+    public void showHeader() {
+        System.out.println("--- System Page ---");
+    }
 }
