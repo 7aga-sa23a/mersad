@@ -24,7 +24,7 @@ public final class ShowCoursesPage extends Page {
 
             ObjectMapper mapper = new ObjectMapper();
             File file = new File("src/main/resources/courses.json");
-            List<Course> courses = Course.loadCourses(mapper, file);
+            List<Course> courses = Course.loadCourses();
 
             System.out.println("Showing details for " + courses.size() + " courses....");
             System.out.println();

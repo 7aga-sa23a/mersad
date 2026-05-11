@@ -1,5 +1,7 @@
 package haga_talga.page;
 
+import java.util.List;
+
 import haga_talga.app.Main;
 import haga_talga.model.CourseData;
 import haga_talga.model.Student;
@@ -8,7 +10,6 @@ import haga_talga.service.CameraService;
 import haga_talga.service.CourseReader;
 import haga_talga.service.ExcelExportService;
 import haga_talga.service.QRScannerService;
-import java.util.List;
 
 // el class da hwa sf7et a5d el 8yab w el 7door b-st5dam el QR Scanner
 public final class TakeAttendancePage extends Page {

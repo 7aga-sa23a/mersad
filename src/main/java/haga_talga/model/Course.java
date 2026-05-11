@@ -3,6 +3,7 @@ package haga_talga.model;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Course {
@@ -56,11 +57,14 @@ public class Course {
         this.semester = semester;
     }
 
-    public static List<Course> loadCourses(ObjectMapper mapper, File file) throws Exception {
-        if (!file.exists())
+    public static List<Course> loadCourses() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        File coursesFile = new File("src/main/resources/courses.json");
+
+        if (!coursesFile.exists())
             return new ArrayList<>();
         return mapper.readValue(
-                file,
+                coursesFile,
                 mapper.getTypeFactory().constructCollectionType(List.class, Course.class));
     }
 
@@ -81,7 +85,7 @@ public class Course {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("src/main/resources/courses.json");
         new File("output").mkdirs();
-        List<Course> courses = loadCourses(mapper, file);
+        List<Course> courses = loadCourses();
 
         if (isCourseExist(courses, courseID)) {
             for (Course course : courses) {
@@ -100,7 +104,7 @@ public class Course {
     public void removeStudent(String courseID, String studentName) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("src/main/resources/courses.json");
-        List<Course> courses = loadCourses(mapper, file);
+        List<Course> courses = loadCourses();
 
         if (!isCourseExist(courses, courseID)) {
             System.out.println("Course " + courseID + " doesn't exist.");
@@ -123,7 +127,7 @@ public class Course {
     public ArrayList<String> getRegisteredStudent(String courseName) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("src/main/resources/courses.json");
-        List<Course> courses = loadCourses(mapper, file);
+        List<Course> courses = loadCourses();
 
         for (Course course : courses) {
             if (course.name.equals(courseName)) {
@@ -140,7 +144,7 @@ public class Course {
     public static void addCourse(String courseID, String name, int year, int semester) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("src/main/resources/courses.json");
-        List<Course> courses = loadCourses(mapper, file);
+        List<Course> courses = loadCourses();
         Course course = new Course(courseID, name, year, semester);
         if (!isCourseExist(courses, courseID)) {
             courses.add(course);
@@ -154,7 +158,7 @@ public class Course {
     public static void editCourse(String courseID, String name, int year, int semester) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("src/main/resources/courses.json");
-        List<Course> courses = loadCourses(mapper, file);
+        List<Course> courses = loadCourses();
 
         if (!isCourseExist(courses, courseID)) {
             System.out.println("This Course is not Exist");
@@ -173,7 +177,7 @@ public class Course {
     public static void deleteCourse(String courseID) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("src/main/resources/courses.json");
-        List<Course> courses = loadCourses(mapper, file);
+        List<Course> courses = loadCourses();
 
         if (!isCourseExist(courses, courseID)) {
             System.out.println("This Course doesn't Exist");

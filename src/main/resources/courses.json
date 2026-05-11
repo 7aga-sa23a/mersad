@@ -1,29 +1,43 @@
 [ {
+  "ID" : "IS201",
+  "name" : "Multimedia",
+  "year" : 2026,
+  "semester" : 2,
+  "Students" : [ ],
+  "id" : "IS201"
+}, {
+  "ID" : "CS206",
+  "name" : "Web Design & Development",
+  "year" : 2026,
+  "semester" : 2,
+  "Students" : [ ],
+  "id" : "CS206"
+}, {
+  "ID" : "CS203",
+  "name" : "Computer Programming-2",
+  "year" : 2026,
+  "semester" : 2,
+  "Students" : [ ],
+  "id" : "CS203"
+}, {
+  "ID" : "CS204",
+  "name" : "Data Structure",
+  "year" : 2026,
+  "semester" : 2,
+  "Students" : [ ],
+  "id" : "CS204"
+}, {
   "ID" : "CS205",
-  "name" : "Programming 2 (OOP)",
+  "name" : "Operating Systems-1",
   "year" : 2026,
   "semester" : 2,
   "Students" : [ ],
   "id" : "CS205"
 }, {
-  "ID" : "201",
-  "name" : "Programming 3",
-  "year" : 2025,
-  "semester" : 5,
-  "Students" : [ ],
-  "id" : "201"
-}, {
-  "ID" : "CS205",
-  "name" : "Programming 2 (OOP)",
-  "year" : 2025,
+  "ID" : "IS205",
+  "name" : "Introduction to Operation Research & Decision Support",
+  "year" : 2026,
   "semester" : 2,
   "Students" : [ ],
-  "id" : "CS205"
-}, {
-  "ID" : "no",
-  "name" : "non",
-  "year" : 2020,
-  "semester" : 3,
-  "Students" : [ ],
-  "id" : "no"
+  "id" : "IS205"
 } ]
