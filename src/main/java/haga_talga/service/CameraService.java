@@ -1,12 +1,16 @@
 package haga_talga.service;
 
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamResolution;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamResolution;
 
 /**
  * Service el camera elly b-tfte7 el webcam w btwareek el preview w bt-l2ot el frames

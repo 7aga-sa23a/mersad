@@ -53,9 +53,10 @@ public class Main {
      *
      * @param args
      */
-    @SuppressWarnings("ConvertToTryWithResources")
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws Exception {
+        // Enforce UTF-8 encoding for ASCII art
+        enforceUTF8();
+        
         // Starting page
         final OnboardingPage onboardingPage = (OnboardingPage) pageMap.get("OnboardingPage");
         String nextPageName = onboardingPage.display().strip();
@@ -93,6 +94,13 @@ public class Main {
                 System.exit(2);
             }
         }
+    }
 
+    private static void enforceUTF8() throws Exception {
+        if (System.getProperty("os.name", "").contains("Windows")) {
+            new ProcessBuilder("cmd", "/c", "chcp 65001").inheritIO().start().waitFor();
+        }
+        System.setOut(new java.io.PrintStream(System.out, true, "UTF-8"));
+        System.setErr(new java.io.PrintStream(System.err, true, "UTF-8"));
     }
 }
