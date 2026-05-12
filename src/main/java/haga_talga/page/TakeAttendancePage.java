@@ -10,6 +10,7 @@ import haga_talga.service.CameraService;
 import haga_talga.service.CourseReader;
 import haga_talga.service.ExcelExportService;
 import haga_talga.service.QRScannerService;
+import haga_talga.util.Formatter;
 
 // el class da hwa sf7et a5d el 8yab w el 7door b-st5dam el QR Scanner
 public final class TakeAttendancePage extends Page {
@@ -37,9 +38,7 @@ public final class TakeAttendancePage extends Page {
     // b-tzhr el sf7a w tbda2 el workflow bta3 a5d el 8yab
     @Override
     public String display() {
-        System.out.println("\n========================================");
-        System.out.println("     TAKE ATTENDANCE (QR SCANNER)");
-        System.out.println("========================================\n");
+        Formatter.header("TAKE ATTENDANCE", "cyan", "single", "center", 140);
 
         if (!selectCourse()) {
             return "DashboardPage";
@@ -54,18 +53,18 @@ public final class TakeAttendancePage extends Page {
     private boolean selectCourse() {
         List<CourseData> courses = courseReader.getCourses();
         if (courses.isEmpty()) {
-            System.out.println("No course available. Please add a course first.");
-            System.out.println("Press Enter to return to Dashboard...");
+            Formatter.warning("No course available. Please add a course first.");
+            Formatter.info("Press Enter to return to Dashboard...");
             Main.scanner.nextLine();
             return false;
         }
 
-        System.out.println("=== SELECT COURSE ===");
+        Formatter.prompt("=== SELECT COURSE ===\n", "blue");
         for (int i = 0; i < courses.size(); i++) {
             CourseData c = courses.get(i);
-            System.out.println((i + 1) + ". " + c.getDisplayName());
+            Formatter.prompt((i + 1) + ". " + c.getDisplayName() + "\n", "blue");
         }
-        System.out.print("Select (0 to cancel): ");
+        Formatter.prompt("Select (0 to cancel): \n", "blue");
 
         try {
             int choice = Integer.parseInt(Main.scanner.nextLine().trim());
@@ -76,10 +75,10 @@ public final class TakeAttendancePage extends Page {
                 attendanceService.setCurrentCourse(course);
                 return true;
             } else {
-                System.out.println("Invalid selection.");
+                Formatter.error("Invalid selection.");
             }
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input.");
+            Formatter.error("Invalid input.");
         }
         return false;
     }
@@ -88,17 +87,17 @@ public final class TakeAttendancePage extends Page {
     private void startScanningSession() {
         CourseData course = attendanceService.getCurrentCourse();
         if (course == null) {
-            System.out.println("No course selected.");
+            Formatter.info("No course selected.");
             return;
         }
 
-        System.out.println("\n=== ATTENDANCE SESSION STARTED ===");
-        System.out.println("Course: " + course.getDisplayName());
-        System.out.println("Expected Students: " + course.getNumberOfStudents());
+        Formatter.prompt("\n=== ATTENDANCE SESSION STARTED ===\n", "blue");
+        Formatter.prompt("Course: " + course.getDisplayName() + "\n", "blue");
+        Formatter.prompt("Expected Students: " + course.getNumberOfStudents() + "\n", "blue");
         System.out.println();
 
         if (!cameraService.openCamera()) {
-            System.out.println("Failed to open camera.");
+            Formatter.error("Failed to open camera.");
             return;
         }
 
@@ -108,8 +107,8 @@ public final class TakeAttendancePage extends Page {
 
     // el loop el 2asasy elly by2ra mn el camera w ytsna el user y-save aw y-exit
     private void scanLoop() {
-        System.out.println("Type 'y' + Enter to save and quit, or 'n' + Enter to exit without saving.");
-        System.out.println("(You can also just close the camera window to automatically save and finish)");
+        Formatter.info("Type 'y' + Enter to save and quit, or 'n' + Enter to exit without saving.");
+        // Formatter.info("(You can also just close the camera window to automatically save and finish)");
         
         boolean actionTaken = false;
 
@@ -120,12 +119,12 @@ public final class TakeAttendancePage extends Page {
                 if (added) {
                     String time = java.time.LocalDateTime.now().format(
                             java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-                    System.out.println("\n[SCANNED] " + student.getId() + " - " + student.getName() + " at " + time);
+                    Formatter.success("Scanned a student with ID: " + student.getId());
                 }
                 qrScannerService.clearLastScanned();
             }
 
-            System.out.print("\rScanned: " + qrScannerService.getScannedCount() + " | Total: " + attendanceService.getTotalCount());
+            // Formatter.info("\rScanned: " + qrScannerService.getScannedCount() + " | Total: " + attendanceService.getTotalCount());
 
             try {
                 if (System.in.available() > 0) {
@@ -151,14 +150,14 @@ public final class TakeAttendancePage extends Page {
         }
 
         if (!actionTaken) {
-            System.out.println("\n\nCamera window closed. Auto-saving attendance...");
+            Formatter.info("Camera window closed. Auto-saving attendance...");
             saveAndQuit();
         } else {
             qrScannerService.stopScanning();
             cameraService.closeCamera();
         }
         
-        System.out.println("\nPress Enter to return to Dashboard...");
+        Formatter.prompt("\nPress Enter to return to Dashboard...", "blue");
         Main.scanner.nextLine();
     }
 
@@ -172,14 +171,14 @@ public final class TakeAttendancePage extends Page {
         if (course != null && course.getRecordCount() > 0) {
             boolean success = excelService.exportFinal(course);
             if (success) {
-                System.out.println("\n\nAttendance saved! (" + course.getRecordCount() + " records)");
-                System.out.println("File: src/main/resources/attendanceExcle/" + course.getExportFileName());
+                Formatter.success("Attendance saved! (" + course.getRecordCount() + " records)");
+                Formatter.info("File: src/main/resources/attendanceExcle/" + course.getExportFileName());
                 attendanceService.saveSessionToCounters();
             } else {
-                System.out.println("\nFailed to save Excel file.");
+                Formatter.error("Failed to save Excel file.");
             }
         } else {
-            System.out.println("\nNo attendance records to save.");
+            Formatter.info("No attendance records to save.");
         }
     }
 
@@ -187,6 +186,6 @@ public final class TakeAttendancePage extends Page {
     private void exitWithoutSave() {
         qrScannerService.stopScanning();
         cameraService.closeCamera();
-        System.out.println("\nAttendance not saved.");
+        Formatter.info("Attendance not saved.");
     }
 }

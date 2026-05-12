@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamResolution;
 
+import haga_talga.util.Formatter;
+
 /**
  * Service el camera elly b-tfte7 el webcam w btwareek el preview w bt-l2ot el frames
  */
@@ -53,14 +55,14 @@ public class CameraService {
         
         // Check if camera exists
         if (!hasCamera()) {
-            System.out.println("No webcam found!");
+            Formatter.error("No webcam found!");
             return false;
         }
 
         // Get default webcam
         webcam = Webcam.getDefault();
         if (webcam == null) {
-            System.out.println("Cannot access webcam!");
+            Formatter.error("Cannot access webcam!");
             return false;
         }
 
@@ -116,7 +118,7 @@ public class CameraService {
         });
         captureThread.start();
 
-        System.out.println("Camera opened successfully!");
+        Formatter.success("Camera opened successfully!");
         return true;
     }
 

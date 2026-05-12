@@ -1,6 +1,7 @@
 package haga_talga.page;
 
 import haga_talga.app.Main;
+import haga_talga.util.Formatter;
 
 
 public final class DashboardPage extends Page {
@@ -11,17 +12,8 @@ public final class DashboardPage extends Page {
     @Override
     public String display() {
         // Display dashboard options
-        System.out.println("Welcome to the dashboard!");
-        System.out.println("What do you wish to do today?");
-        System.out.println("-----------------------------");
-        System.out.println("1. Add a course");
-        System.out.println("2. Display my courses");
-        System.out.println("3. Take today's attendance");
-        System.out.println("4. View attendance for a course");
-        System.out.println("5. Delete a course");
-        System.out.println("6. Exit program");
-        System.out.println();
-        System.out.println("Enter your choice: ");
+        Formatter.box("Welcome to the dashboard!\nWhat do you wish to do today?\n-----------------------------\n1. Add a course\n2. Display my courses\n3. Take today's attendance\n4. View attendance for a course\n5. Delete a course\n6. Exit program", "cyan", "single", "center", 140);
+        Formatter.prompt("Enter your choice: ", "blue");
 
         // Keep prompting the user to choose an option, until they make a valid choice
         while (true) {
@@ -58,8 +50,8 @@ public final class DashboardPage extends Page {
             }
             // Invalid option
             else {
-                System.out.println("Invalid option.");
-                System.out.println("Please enter the option number or name.\n");
+                Formatter.error("Invalid option.");
+                Formatter.error("Please enter the option number or name.\n");
             }
 
             // The loop will continue until the user makes a valid choice

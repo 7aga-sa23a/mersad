@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import haga_talga.util.Formatter;
+
 public class Course {
     public String ID;
     public String name;
@@ -158,9 +160,9 @@ public class Course {
         Course course = new Course(courseID, name, year, semester);
         if (!isCourseExist(courses, courseID)) {
             courses.add(course);
-            System.out.println("Course added successfully.");
+            Formatter.success("Course added successfully.");
         } else {
-            System.out.println("This Course already exists.");
+            Formatter.warning("This Course already exists.");
         }
         saveCourses(mapper, file, courses);
     }

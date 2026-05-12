@@ -14,6 +14,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import haga_talga.util.Formatter;
+
 /**
  * el service di b-tdir data el talaba f el JSON
  * bt-save el talaba w 3dad ayam el 7door f mlafat JSON
@@ -89,7 +91,7 @@ public class CourseStudentJsonService {
             String json = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
             return gson.fromJson(json, CourseStudentsJson.class);
         } catch (IOException | JsonSyntaxException e) {
-            System.out.println("[JSON] Error reading file: " + e.getMessage());
+            Formatter.error("[JSON] Error reading file.");
             return null;
         }
     }
@@ -98,7 +100,7 @@ public class CourseStudentJsonService {
         try {
             Files.createDirectories(getJsonDirectory());
         } catch (IOException e) {
-            System.out.println("[JSON] Error creating directory: " + e.getMessage());
+            Formatter.error("[JSON] Error creating directory.");
         }
     }
 
@@ -122,7 +124,7 @@ public class CourseStudentJsonService {
         }
 
         if (isStudentAlreadyInJson(jsonData, student)) {
-            System.out.println("[JSON] Student already exists: " + student.getName());
+            Formatter.error("[JSON] Student already exists.");
             return false;
         }
 
@@ -140,17 +142,28 @@ public class CourseStudentJsonService {
      * b-tsave el JSON f el mlaf
      */
     private boolean saveJsonToFile(String filePath, CourseStudentsJson jsonData, boolean isNewFile) {
-        try (Writer writer = new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8)) {
-            gson.toJson(jsonData, writer);
-            String action = isNewFile ? "Created" : "Updated";
-            String fileName = new File(filePath).getName();
-            System.out.println("[" + action + " JSON] " + fileName);
-            System.out.println("[JSON] Saved: " + filePath + " (Total students: " + jsonData.Students.size() + ")");
-            return true;
-        } catch (IOException e) {
-            System.out.println("[JSON] Error saving file: " + e.getMessage());
-            return false;
-        }
+        try (Writer writer = new OutputStreamWriter(
+        new FileOutputStream(filePath),
+        StandardCharsets.UTF_8)) {
+
+    gson.toJson(jsonData, writer);
+
+    String action = isNewFile ? "Created" : "Updated";
+    String fileName = new File(filePath).getName();
+
+    // Formatter.success("[" + action + " JSON] " + fileName);
+
+    // Formatter.success(
+    //     "[JSON] Saved: " + filePath +
+    //     " (Total students: " + jsonData.Students.size() + ")"
+    // );
+
+    return true;
+
+} catch (IOException e) {
+    Formatter.error("[JSON] Error saving file.");
+    return false;
+}
     }
 
     public boolean syncWithExistingRecords(CourseData course) {

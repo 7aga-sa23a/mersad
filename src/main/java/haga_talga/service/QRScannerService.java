@@ -1,13 +1,19 @@
 package haga_talga.service;
 
-import haga_talga.model.Student;
-import com.google.zxing.*;
-import com.google.zxing.common.HybridBinarizer;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
+
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
+
+import haga_talga.model.Student;
+import haga_talga.util.Formatter;
 
 /**
  * el service di b-tscan el QR codes mn el camera
@@ -53,7 +59,7 @@ public class QRScannerService {
      */
     public void startScanning() {
         if (!cameraService.isCameraOpen()) {
-            System.out.println("Camera not open!");
+            Formatter.error("Camera not open!");
             return;
         }
         running = true;
@@ -85,20 +91,19 @@ public class QRScannerService {
                 Result result = decodeQR(image);
                 if (result != null) {
                     String qrData = result.getText();
-                    System.out.println("[DEBUG] QR Found: " + qrData);
                     
                     // Parse QR to Student
                     Student student = Student.fromQRData(qrData);
                     if (student != null && !scannedIds.contains(student.getId())) {
                         // New student add it
                         scannedIds.add(student.getId());
+                        // Formatter.success("\nScanned a student with ID: " + student.getId());
                         lastScannedStudent = student;
-                        System.out.println("[SCANNED] " + student);
                     }
                 }
                 sleep(SCAN_DELAY);
             } catch (Exception e) {
-                System.out.println("[ERROR] " + e.getMessage());
+                Formatter.error("An error has occured while scanning.");
                 sleep(SCAN_DELAY);
             }
         }
@@ -119,7 +124,7 @@ public class QRScannerService {
         } catch (NotFoundException e) {
             return null;
         } catch (Exception e) {
-            System.out.println("[DECODE ERROR] " + e.getMessage());
+            Formatter.error("An error has occured while decoding.");
             return null;
         }
     }

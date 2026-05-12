@@ -1,10 +1,9 @@
 package haga_talga.model;
 
-import java.util.Scanner;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -12,6 +11,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import haga_talga.util.Formatter;
 
 public class Doctor {
 
@@ -48,12 +49,12 @@ public class Doctor {
             }
         }
         if (!uniqueID) {
-            System.out.println(
+            Formatter.error(
                     "ID should be unique and numbers only. Please enter :\n1- unique ID.\n2- login if you already have an account.");
 
             int choose = sc.nextInt();
             while (choose != 1 && choose != 2) {
-                System.out.println(
+                Formatter.error(
                         "Invalid choice. Please enter :\n1- unique ID.\n2- login if you already have an account.");
                 choose = sc.nextInt();
             }
@@ -106,8 +107,7 @@ public class Doctor {
         try (FileWriter writer = new FileWriter(fileName)) {
             gson.toJson(doctorsArray, writer);
         } catch (IOException e) {
-            System.out.println("Error saving doctors data");
-            e.printStackTrace();
+            Formatter.error("Error saving doctors data");
         }
 
         return 0;

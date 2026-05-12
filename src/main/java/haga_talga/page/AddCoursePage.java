@@ -3,6 +3,8 @@ package haga_talga.page;
 import haga_talga.app.Main;
 import haga_talga.model.Course;
 
+import haga_talga.util.Formatter;
+
 public final class AddCoursePage extends Page {
     /**
      * Add course
@@ -23,12 +25,14 @@ public final class AddCoursePage extends Page {
 
     @Override
     public String display() {
+        Formatter.header("ADD COURSE", "cyan", "single", "center", 140);
+
         // Input scanner
         // Prompt for course details
-        System.out.print("Course name: ");
+        Formatter.prompt("Course Name: ", "blue");
         String courseName = Main.scanner.nextLine().strip();
 
-        System.out.print("Course code: ");
+        Formatter.prompt("Course code: ", "blue");
         String courseCode = Main.scanner.nextLine().strip();
 
         int courseYear;
@@ -36,24 +40,22 @@ public final class AddCoursePage extends Page {
 
         while (true) {
             try {
-                System.out.print("Course year: ");
+                Formatter.prompt("Course year: ", "blue");
                 courseYear = Main.scanner.nextInt();
                 break;
             } catch (Exception e) {
-                System.out.println("Invalid input for course year. Please enter a valid integer.");
+                Formatter.error("Invalid input for course year. Please enter a valid integer.");
                 Main.scanner.nextLine(); // Clear the invalid input
-                continue; // Prompt again
             }
         }
         while(true) {
             try {
-                System.out.print("Course semester: ");
+                Formatter.prompt("Course semester: ","blue");
                 courseSemester = Main.scanner.nextInt();
                 break;
             } catch (Exception e) {
-                System.out.println("Invalid input for course semester. Please enter a valid integer.");
+                Formatter.error("Invalid input for course semester. Please enter a valid integer.");
                 Main.scanner.nextLine(); // Clear the invalid input
-                continue; // Prompt again
             }
         }
 
@@ -61,17 +63,17 @@ public final class AddCoursePage extends Page {
 
         // Try to add the course
         try {
-            System.out.println("Adding course...");
+            Formatter.typewriter("Adding course...", 120, "blue");
             Thread.sleep(1000);
             Course.addCourse(courseCode, courseName, courseYear, courseSemester);
             Thread.sleep(2000);
         } catch (Exception e) {
-            System.out.println("An error has occured while adding the course.");
-            System.err.println(e.getMessage());
+            Formatter.error("An error has occured while adding the course.");
         } finally {
             System.out.println();
         }
 
+        Main.scanner.nextLine(); // Clear the newline character from the input buffer
         return "DashboardPage";
     }
 }
