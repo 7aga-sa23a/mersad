@@ -1,14 +1,18 @@
 package haga_talga.service;
 
-import haga_talga.model.Student;
-import com.google.zxing.*;
-import com.google.zxing.common.HybridBinarizer;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
+
+import haga_talga.model.Student;
 import haga_talga.util.Formatter;
 
 /**
@@ -93,6 +97,7 @@ public class QRScannerService {
                     if (student != null && !scannedIds.contains(student.getId())) {
                         // New student add it
                         scannedIds.add(student.getId());
+                        // Formatter.success("\nScanned a student with ID: " + student.getId());
                         lastScannedStudent = student;
                     }
                 }

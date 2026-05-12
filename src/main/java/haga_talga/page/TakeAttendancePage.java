@@ -10,7 +10,6 @@ import haga_talga.service.CameraService;
 import haga_talga.service.CourseReader;
 import haga_talga.service.ExcelExportService;
 import haga_talga.service.QRScannerService;
-
 import haga_talga.util.Formatter;
 
 // el class da hwa sf7et a5d el 8yab w el 7door b-st5dam el QR Scanner
@@ -120,7 +119,7 @@ public final class TakeAttendancePage extends Page {
                 if (added) {
                     String time = java.time.LocalDateTime.now().format(
                             java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-                    Formatter.success("\nScanned a student with ID: " + student.getId());
+                    Formatter.success("Scanned a student with ID: " + student.getId());
                 }
                 qrScannerService.clearLastScanned();
             }
@@ -151,7 +150,7 @@ public final class TakeAttendancePage extends Page {
         }
 
         if (!actionTaken) {
-            Formatter.info("\n\nCamera window closed. Auto-saving attendance...");
+            Formatter.info("Camera window closed. Auto-saving attendance...");
             saveAndQuit();
         } else {
             qrScannerService.stopScanning();
@@ -172,14 +171,14 @@ public final class TakeAttendancePage extends Page {
         if (course != null && course.getRecordCount() > 0) {
             boolean success = excelService.exportFinal(course);
             if (success) {
-                Formatter.success("\n\nAttendance saved! (" + course.getRecordCount() + " records)");
+                Formatter.success("Attendance saved! (" + course.getRecordCount() + " records)");
                 Formatter.info("File: src/main/resources/attendanceExcle/" + course.getExportFileName());
                 attendanceService.saveSessionToCounters();
             } else {
-                Formatter.error("\nFailed to save Excel file.");
+                Formatter.error("Failed to save Excel file.");
             }
         } else {
-            Formatter.info("\nNo attendance records to save.");
+            Formatter.info("No attendance records to save.");
         }
     }
 
@@ -187,6 +186,6 @@ public final class TakeAttendancePage extends Page {
     private void exitWithoutSave() {
         qrScannerService.stopScanning();
         cameraService.closeCamera();
-        Formatter.info("\nAttendance not saved.");
+        Formatter.info("Attendance not saved.");
     }
 }

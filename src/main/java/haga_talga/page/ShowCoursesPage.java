@@ -1,9 +1,6 @@
 package haga_talga.page;
 
-import java.io.File;
 import java.util.List;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import haga_talga.app.Main;
 import haga_talga.model.Course;
@@ -35,9 +32,6 @@ public final class ShowCoursesPage extends Page {
             }
 
             Formatter.typewriter("Showing details for " + courses.size() + " courses...", 50, "blue");
-            System.out.println();
-            Formatter.prompt("-----------------------------", "blue");
-            Formatter.prompt("-----------------------------", "blue");
             System.out.println();
             Thread.sleep(1000);
 
