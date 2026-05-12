@@ -1,5 +1,9 @@
 package haga_talga.app;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 import haga_talga.page.AddCoursePage;
 import haga_talga.page.DashboardPage;
 import haga_talga.page.DeleteCoursePage;
@@ -10,9 +14,7 @@ import haga_talga.page.ShowCourseAttendancePage;
 import haga_talga.page.ShowCoursesPage;
 import haga_talga.page.SignupPage;
 import haga_talga.page.TakeAttendancePage;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import haga_talga.util.Formatter;
 
 // Run the program using the following command: java Main.java
 // Or use this shortcut in VS Code: Ctrl + F5
@@ -57,6 +59,8 @@ public class Main {
         // Enforce UTF-8 encoding for ASCII art
         enforceUTF8();
         
+        Formatter.clearScreen();
+
         // Starting page
         final OnboardingPage onboardingPage = (OnboardingPage) pageMap.get("OnboardingPage");
         String nextPageName = onboardingPage.display().strip();
@@ -73,6 +77,11 @@ public class Main {
                 // map since the compiler does not know for sure if this object is a page, for
                 // this reason we check if the object is indeed a page.
                 if (nextPageObject instanceof Page) {
+                    Formatter.typewriter("Loading next Page...", 120, "blue");
+                    Formatter.success("Loaded!");
+                    Formatter.sleep(1000);
+                    Formatter.clearScreen();
+                    
                     Page nextPage = (Page) nextPageObject;
                     nextPageName = nextPage.display();
                 } else {

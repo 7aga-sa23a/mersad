@@ -2,6 +2,7 @@ package haga_talga.page;
 
 import haga_talga.app.Main;
 import haga_talga.model.Doctor;
+import haga_talga.util.Formatter;
 
 
 // this class is for signup of doctors.
@@ -15,22 +16,24 @@ public class SignupPage extends Page {
     }
 
     public String display() {
+        Formatter.header("SIGNUP", "cyan", "single", "center", 140);
+
         // take Doctor name and save it in username variable
-        System.out.println("Enter username: ");
+        Formatter.prompt("Enter username: ", "blue");
         String username = Main.scanner.nextLine();
 
         // take Doctor ID and save it in ID variable and all should be unique and
         // numbers
-        System.out.println("Enter ID: ");
+        Formatter.prompt("Enter ID: ", "blue");
         String ID = Main.scanner.nextLine();
 
         // take Doctor password and save it in password variable, and ask to repeat the
         // password until it matches with the first one.
-        System.out.println("Enter password: ");
+        Formatter.prompt("Enter password: ", "blue");
         String password = Main.scanner.nextLine();
 
         while (true) {
-            System.out.println("Enter password again: ");
+            Formatter.prompt("Enter password again: ", "blue");
             String repeatedPassword = Main.scanner.nextLine();
 
             // if it matches save it in json file
@@ -42,12 +45,12 @@ public class SignupPage extends Page {
                     // login page
                     return "LoginPage";
                 }
-                System.out.println("account created successfully");
+                Formatter.success("account created successfully");
                 return "DashboardPage";
             }
             // if it does not match ask to enter password again
             else {
-                System.out.println("Passwords do not match. Please enter password again: ");
+                Formatter.error("Passwords do not match. Please enter password again: ");
             }
         }
     }

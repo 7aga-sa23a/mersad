@@ -2,6 +2,7 @@ package haga_talga.page;
 
 import haga_talga.app.Main;
 import haga_talga.model.Course;
+import haga_talga.util.Formatter;
 
 public final class DeleteCoursePage extends Page {
     public DeleteCoursePage() {
@@ -15,30 +16,30 @@ public final class DeleteCoursePage extends Page {
      * message and return to the dashboard
      */
     public String display() {
+        Formatter.header("DELETE COURSE", "cyan", "single", "center", 140);
+
         // Prompt for course code
-        System.out.print("Course code: ");
+        Formatter.prompt("Course code: ", "blue");
         String courseCode = Main.scanner.nextLine().strip();
 
         System.out.println();
 
         // Confirm deletion
-        System.out.println(
-                "Are you sure you want to delete the course with code " + courseCode + "? (yes/no)");
+        Formatter.warning("Are you sure you want to delete the course with code " + courseCode + "? (yes/no)");
         String confirmation = Main.scanner.nextLine().strip().toLowerCase();
 
         if (!confirmation.equals("yes") && !confirmation.equals("y")) {
-            System.out.println("Course deletion cancelled.");
+            Formatter.info("Course deletion cancelled.");
             return "DashboardPage";
         } else {
             // Try to delete the course
             try {
-                System.out.println("Deleting course...");
+                Formatter.typewriter(courseCode, 120, courseCode);
                 Thread.sleep(1000);
                 Course.deleteCourse(courseCode);
                 Thread.sleep(2000);
             } catch (Exception e) {
-                System.out.println("An error has occured while deleting the course.");
-                System.err.println(e.getMessage());
+                Formatter.error("An error has occured while deleting the course.\nAre you sure the course code is correct?");
             } finally {
                 System.out.println();
             }

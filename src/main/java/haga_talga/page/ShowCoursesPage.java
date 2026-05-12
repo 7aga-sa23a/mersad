@@ -5,9 +5,12 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import haga_talga.app.Main;
 import haga_talga.model.Course;
+import haga_talga.util.Formatter;
 
 public final class ShowCoursesPage extends Page {
+
     /**
      * Show students in course, and their attendance status
      */
@@ -17,39 +20,47 @@ public final class ShowCoursesPage extends Page {
 
     @Override
     public String display() {
+        Formatter.header("SHOW COURSES", "cyan", "single", "center", 140);
+
         try {
-            System.out.println("Showing courses details...");
+            Formatter.typewriter("Showing courses details...", 100, "blue");
             System.out.println();
             Thread.sleep(1000);
 
-            ObjectMapper mapper = new ObjectMapper();
-            File file = new File("src/main/resources/courses.json");
             List<Course> courses = Course.loadCourses();
 
-            System.out.println("Showing details for " + courses.size() + " courses....");
+            if (courses.isEmpty()) {
+                Formatter.warning("No courses found.");
+                return "DashboardPage";
+            }
+
+            Formatter.typewriter("Showing details for " + courses.size() + " courses...", 50, "blue");
             System.out.println();
-            System.out.println("-----------------------------");
-            System.out.println("-----------------------------");
+            Formatter.prompt("-----------------------------", "blue");
+            Formatter.prompt("-----------------------------", "blue");
             System.out.println();
             Thread.sleep(1000);
 
+            String[] headers = new String[]{"Name", "Code", "Year", "Semester", "Registered students"};
+            String[][] rows = new String[courses.size()][5];
+
+            int index = 1;
             for (Course course : courses) {
-                System.out.println("Showing details for course " + course.getName() );
-                System.out.println("Course name: " + course.getName());
-                System.out.println("Course code: " + course.getID());
-                System.out.println("Course year: " + course.getYear());
-                System.out.println("Course semester: " + course.getSemester());
-                System.out.println("Number of registered students: " + course.Students.size());
-                System.out.println();
-                System.out.println("-----------------------------");
-                System.out.println();
+                rows[index - 1][0] = course.getName();
+                rows[index - 1][1] = course.getID();
+                rows[index - 1][2] = String.valueOf(course.getYear());
+                rows[index - 1][3] = String.valueOf(course.getSemester());
+                rows[index - 1][4] = String.valueOf(course.Students.size());
+
+                index++;
             }
 
-            Thread.sleep(2000);
+            Formatter.table(headers, rows, "cyan");
 
+            Formatter.info("Press Enter to return to Dashboard...");
+            Main.scanner.nextLine();
         } catch (Exception e) {
-            System.out.println("An error has occured while showing the course details.");
-            System.err.println(e.getMessage());
+            Formatter.error("An error has occured while showing the course details.");
         } finally {
             System.out.println();
         }

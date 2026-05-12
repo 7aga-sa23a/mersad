@@ -48,12 +48,12 @@ public class Doctor {
             }
         }
         if (!uniqueID) {
-            System.out.println(
+            Formatter.error(
                     "ID should be unique and numbers only. Please enter :\n1- unique ID.\n2- login if you already have an account.");
 
             int choose = sc.nextInt();
             while (choose != 1 && choose != 2) {
-                System.out.println(
+                Formatter.error(
                         "Invalid choice. Please enter :\n1- unique ID.\n2- login if you already have an account.");
                 choose = sc.nextInt();
             }
@@ -106,7 +106,7 @@ public class Doctor {
         try (FileWriter writer = new FileWriter(fileName)) {
             gson.toJson(doctorsArray, writer);
         } catch (IOException e) {
-            System.out.println("Error saving doctors data");
+            Formatter.error("Error saving doctors data");
             e.printStackTrace();
         }
 

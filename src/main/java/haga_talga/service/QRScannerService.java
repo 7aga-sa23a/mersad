@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
 
+import haga_talga.util.Formatter;
+
 /**
  * el service di b-tscan el QR codes mn el camera
  * b-tst5dm ZXing w b-tsh8al f thread lwa7dha 3shan tscan 3la tool
@@ -53,7 +55,7 @@ public class QRScannerService {
      */
     public void startScanning() {
         if (!cameraService.isCameraOpen()) {
-            System.out.println("Camera not open!");
+            Formatter.error("Camera not open!");
             return;
         }
         running = true;
@@ -85,7 +87,6 @@ public class QRScannerService {
                 Result result = decodeQR(image);
                 if (result != null) {
                     String qrData = result.getText();
-                    System.out.println("[DEBUG] QR Found: " + qrData);
                     
                     // Parse QR to Student
                     Student student = Student.fromQRData(qrData);
@@ -93,12 +94,11 @@ public class QRScannerService {
                         // New student add it
                         scannedIds.add(student.getId());
                         lastScannedStudent = student;
-                        System.out.println("[SCANNED] " + student);
                     }
                 }
                 sleep(SCAN_DELAY);
             } catch (Exception e) {
-                System.out.println("[ERROR] " + e.getMessage());
+                Formatter.error("An error has occured while scanning.");
                 sleep(SCAN_DELAY);
             }
         }
@@ -119,7 +119,7 @@ public class QRScannerService {
         } catch (NotFoundException e) {
             return null;
         } catch (Exception e) {
-            System.out.println("[DECODE ERROR] " + e.getMessage());
+            Formatter.error("An error has occured while decoding.");
             return null;
         }
     }

@@ -1,6 +1,9 @@
 package haga_talga.page;
 
+import java.util.ArrayList;
+
 import haga_talga.app.Main;
+import haga_talga.util.Formatter;
 
 public final class OnboardingPage extends Page {
     /**
@@ -18,20 +21,12 @@ public final class OnboardingPage extends Page {
 
     @Override
     public String display() {
-        // Display onboarding information
-        System.out.println("Welcome to the Attendance System.\n" +
-                "Manage your courses, students, and attendance records " +
-                "efficiently through a simple and secure interface.\n");
+        Formatter.header("ONBOARDING", "cyan", "single", "center", 140);
 
-        // Display onboarding options
-        System.out.println("Good day doctor!");
-        System.out.println("Please, choose an option:");
-        System.out.println("-------------------------");
-        System.out.println("1. Login");
-        System.out.println("2. Sign up");
-        System.out.println("3. Exit program");
-        System.out.println();
-        System.out.println("Enter your choice: ");
+        // Display onboarding information
+        Formatter.box("Welcome to the Attendance System.\nManage your courses, students, and attendance records efficiently through a simple and secure interface.\n", "cyan", "single", "center", 140);
+        Formatter.box("Please, choose an option:\n-------------------------\n1. Login\n2. Sign up\n3. Exit program", "cyan", "single", "center", 140);
+        Formatter.prompt("Enter your choice: ", "blue");
 
         // Keep prompting the user to choose an option, until they make a valid choice
         while (true) {

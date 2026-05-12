@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import haga_talga.util.Formatter;
+
 /**
  * el service di b-texport el data l mlaf Excel
  * b-tst5dm FastExcel w b-t7t el 7adreen w el 8aybeen
@@ -35,7 +37,7 @@ public class ExcelExportService {
         List<StudentData> allStudents = jsonService.getStudentsFromJson(course);
         
         if (records.isEmpty() && (allStudents == null || allStudents.isEmpty())) {
-            System.out.println("No records to export.");
+            Formatter.error("No records to export.");
             return false;
         }
 
@@ -151,11 +153,11 @@ public class ExcelExportService {
             }
 
             workbook.finish();
-            System.out.println("Exported to: " + filePath);
+            Formatter.success("Exported to: " + filePath);
             return true;
 
         } catch (IOException e) {
-            System.out.println("Export error: " + e.getMessage());
+            Formatter.error("Export error: ");
             return false;
         }
     }
