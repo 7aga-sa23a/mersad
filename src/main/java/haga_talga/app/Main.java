@@ -86,19 +86,19 @@ public class Main {
                     nextPageName = nextPage.display();
                 } else {
                     // If the object is not a page, then it is not a valid page
-                    System.out.println("Invalid page: " + nextPageName);
-                    System.out.println("Exiting program...");
+                    Formatter.error("Invalid page: " + nextPageName);
+                    Formatter.prompt("Exiting program...", "blue");
                     System.exit(1);
                 }
             } // If the page to navigate to is "exit", then exit the program
             else if (nextPageName.toLowerCase().contains("exit")) {
-                System.out.println("Exiting program...");
+                Formatter.prompt("Exiting program...", "blue");
                 scanner.close();
                 System.exit(0);
             } // If the page to navigate to does not exist in the page map, then it is not valid
             else {
-                System.out.println("Invalid page: " + nextPageName);
-                System.out.println("Exiting program...");
+                Formatter.error("Invalid page: " + nextPageName);
+                Formatter.prompt("Exiting program...", "blue");
                 scanner.close();
                 System.exit(2);
             }
