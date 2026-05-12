@@ -142,7 +142,7 @@ public class CourseStudentJsonService {
      * b-tsave el JSON f el mlaf
      */
     private boolean saveJsonToFile(String filePath, CourseStudentsJson jsonData, boolean isNewFile) {
-        try (Writer writer = new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8)) {
+        try (Writer writer = nebw OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8)) {
             gson.toJson(jsonData, writer);
             String action = isNewFile ? "Created" : "Updated";
             String fileName = new File(filePath).getName();

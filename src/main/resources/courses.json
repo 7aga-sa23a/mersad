@@ -6,13 +6,6 @@
   "Students" : [ ],
   "id" : "IS201"
 }, {
-  "ID" : "CS206",
-  "name" : "Web Design & Development",
-  "year" : 2026,
-  "semester" : 2,
-  "Students" : [ ],
-  "id" : "CS206"
-}, {
   "ID" : "CS203",
   "name" : "Computer Programming-2",
   "year" : 2026,

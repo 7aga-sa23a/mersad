@@ -108,7 +108,6 @@ public class Doctor {
             gson.toJson(doctorsArray, writer);
         } catch (IOException e) {
             Formatter.error("Error saving doctors data");
-            e.printStackTrace();
         }
 
         return 0;

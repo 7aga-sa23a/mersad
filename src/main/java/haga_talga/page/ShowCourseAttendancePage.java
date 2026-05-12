@@ -46,12 +46,16 @@ public final class ShowCourseAttendancePage extends Page {
                 }
             } catch (Exception e) {
                 Formatter.error("An error has occured while fetching course information.");
+                Formatter.info("Press Enter to retry...");
+                Main.scanner.nextLine();
                 return "ShowCourseAttendancePage";
             }
 
             // If no course was found with this ID
             if (courseName.equals("")) {
                 Formatter.error("Course with this ID wasn't found.");
+                Formatter.info("Press Enter to retry...");
+                Main.scanner.nextLine();
                 return "ShowCourseAttendancePage";
             }
 
@@ -89,6 +93,8 @@ public final class ShowCourseAttendancePage extends Page {
                 Formatter.table(new String[]{"Index", "Name", "ID", "Attendance"}, rows, "cyan");
             } catch (Exception e) {
                 Formatter.error("An error has occured while fetching course attendance.\nAre you sure you have taken attendance for this course before?");
+                Formatter.info("Press Enter to return to retry...");
+                Main.scanner.nextLine();
                 return "ShowCourseAttendancePage";
             }
         }

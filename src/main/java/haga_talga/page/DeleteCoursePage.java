@@ -34,9 +34,10 @@ public final class DeleteCoursePage extends Page {
         } else {
             // Try to delete the course
             try {
-                Formatter.typewriter(courseCode, 120, courseCode);
+                Formatter.typewriter("Deleting course...", 120, "blue");
                 Thread.sleep(1000);
                 Course.deleteCourse(courseCode);
+                Formatter.success("Course has been deleted successfully!");
                 Thread.sleep(2000);
             } catch (Exception e) {
                 Formatter.error("An error has occured while deleting the course.\nAre you sure the course code is correct?");
